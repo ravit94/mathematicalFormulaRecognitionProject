@@ -2,32 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad9001b3-f2a0-46be-b211-75fcf668c556" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/02.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/102.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/112.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/12.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/122.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/132.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/142.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/152.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/162.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/172.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/182.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/202.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/212.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/22.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/222.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/32.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/42.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/52.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/62.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/72.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/82.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/92.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/preprocessing/x.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/ravit.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py" beforeDir="false" afterPath="$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/BoundingBoxs.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/BoundingBoxes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/OtsuMethod.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/OtsuMethod.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/exe.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/exe_bin.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/exp.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/exp.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/exp_bin.PNG" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,44 +26,52 @@
           <entry key="project.closed" value="1" />
           <entry key="project.open.time.29" value="1" />
           <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="PNG" value="19" />
-          <entry key="png" value="179" />
-          <entry key="py" value="23" />
+          <entry key="PNG" value="20" />
+          <entry key="config" value="2" />
+          <entry key="png" value="217" />
+          <entry key="py" value="26" />
           <entry key="txt" value="1" />
+          <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="198" />
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="23" />
+          <entry key="Image" value="237" />
+          <entry key="PLAIN_TEXT" value="3" />
+          <entry key="Python" value="26" />
+          <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="517" />
+          <entry key="Python Console" value="14" />
+          <entry key="dummy" value="1" />
+          <entry key="py" value="2266" />
+          <entry key="txt" value="43" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="517" />
+          <entry key="PLAIN_TEXT" value="44" />
+          <entry key="Python" value="2280" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="10" column="50" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -90,20 +82,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/preprocessing/OtsuMethod.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+            <state relative-caret-position="216">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="36" lean-forward="true" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#47#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/preprocessing/BoundingBoxs.py">
+        <entry file="file://$PROJECT_DIR$/preprocessing/BoundingBoxes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="233">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
             </state>
           </provider>
         </entry>
@@ -117,6 +118,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>)</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -124,12 +130,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Main.py" />
         <option value="$PROJECT_DIR$/Binarization/OtsuMethod.py" />
         <option value="$PROJECT_DIR$/preprocessing/ROI.py" />
-        <option value="$PROJECT_DIR$/preprocessing/OtsuMethod.py" />
+        <option value="$PROJECT_DIR$/.git/config" />
         <option value="$PROJECT_DIR$/preprocessing/BoundingBoxs.py" />
+        <option value="$PROJECT_DIR$/preprocessing/OtsuMethod.py" />
+        <option value="$PROJECT_DIR$/preprocessing/BoundingBoxes.py" />
         <option value="$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py" />
+        <option value="$PROJECT_DIR$/Main.py" />
       </list>
     </option>
   </component>
@@ -171,9 +179,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ravir\PycharmProjects\FinalProject" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ravir\PycharmProjects\FinalProject\preprocessing" />
       <recent name="C:\Users\ravir\PycharmProjects\FinalProject\Binarization" />
@@ -191,7 +202,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.SymbolRecognition">
+  <component name="RunManager" selected="Python.Main">
     <configuration name="BoundingBoxs" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FinalProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -204,7 +215,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocessing/BoundingBoxs.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\ravir\PycharmProjects\FinalProject\preprocessing\BoundingBoxes.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="FinalProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -226,27 +258,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocessing/OtsuMethod.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="OtsuMethod" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="FinalProject" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Binarization" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Binarization/OtsuMethod.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -298,19 +309,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.OtsuMethod" />
       <item itemvalue="Python.BoundingBoxs" />
       <item itemvalue="Python.SymbolRecognition" />
       <item itemvalue="Python.OtsuMethod (1)" />
       <item itemvalue="Python.ROI" />
+      <item itemvalue="Python.Main" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Main" />
         <item itemvalue="Python.SymbolRecognition" />
         <item itemvalue="Python.BoundingBoxs" />
         <item itemvalue="Python.OtsuMethod (1)" />
         <item itemvalue="Python.ROI" />
-        <item itemvalue="Python.OtsuMethod" />
       </list>
     </recent_temporary>
   </component>
@@ -325,21 +336,37 @@
       <option name="presentableId" value="Default" />
       <updated>1533910146202</updated>
     </task>
+    <task id="LOCAL-00001" summary="First Commit">
+      <created>1534354580218</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1534354580218</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Delete the boundingboxs">
+      <created>1534486650828</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1534486650828</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2247191" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.50033045" side_tool="true" visible="true" weight="0.32907802" />
-      <window_info anchor="bottom" id="Python Console" order="2" weight="0.32907802" />
+      <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.4990086" weight="0.32907802" />
+      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.5009914" side_tool="true" weight="0.32907802" />
+      <window_info anchor="bottom" id="Python Console" order="2" sideWeight="0.4990086" weight="0.32907802" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32907802" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="5" sideWeight="0.49966952" visible="true" weight="0.32907802" />
-      <window_info anchor="bottom" id="Run" order="6" sideWeight="0.49966952" visible="true" weight="0.32765958" />
+      <window_info anchor="bottom" id="Version Control" order="5" sideWeight="0.4990086" weight="0.32907802" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49966952" visible="true" weight="0.27801418" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.3602837" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -352,13 +379,18 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First Commit" />
+    <MESSAGE value="Delete the boundingboxs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete the boundingboxs" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/Main.py</url>
+          <line>9</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -371,64 +403,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/preprocessing/10.png" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/8.png" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/6.png" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/4.png" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/1.png" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/11.png" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/0.png" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/21.png" />
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/PIL/_util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/PIL/Image.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="2579" selection-start-line="2579" selection-end-line="2579" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="311" selection-start-line="311" selection-end-line="311" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/722.png" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/602.png" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/492.png" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/402.png" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/312.png" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/exp_bin.PNG">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/exp.PNG">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/ROI.py" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/t.txt" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/92.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/23.PNG" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/3.PNG" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/2.PNG" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/c_bin.PNG" />
-    <entry file="file://$PROJECT_DIR$/preprocessing/202.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/142.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/preprocessing/132.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -489,29 +463,125 @@
     <entry file="file://$PROJECT_DIR$/preprocessing/62.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8500" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/apps/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3060" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.git/config">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exp_bin.PNG">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/9.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/10.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/11.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/12.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/13.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/14.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/15.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/16.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/17.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/18.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/19.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/21.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="10" column="50" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/OtsuMethod.py">
+    <entry file="file://$PROJECT_DIR$/preprocessing/BoundingBoxes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+        <state relative-caret-position="233">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/BoundingBoxs.py">
+    <entry file="file://$PROJECT_DIR$/preprocessing/OtsuMethod.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+        <state relative-caret-position="216">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/4.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/6.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/5.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/7.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/8.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/22.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="36" lean-forward="true" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#47#0" expanded="true" />
           </folding>
         </state>
       </provider>

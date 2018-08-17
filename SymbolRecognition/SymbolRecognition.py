@@ -1,11 +1,28 @@
 import pytesseract
 from PIL import Image
 from PIL import ImageFilter
-import cv2
 
+class SymbolRecognition(object):
+    """
+    OtsuMethod used to convert image into binary image.
+    """
 
-im = Image.open("C:\\Users\\ravir\\PycharmProjects\\FinalProject\\preprocessing\\x.png")
-im.filter(ImageFilter.SHARPEN)
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-print(pytesseract.image_to_string(im , lang='eng', boxes=False,config='--psm 10 --eom 3 -c tessedit_char_whitelist=€0123456789'))
-print(pytesseract.image_to_string(im, boxes=True))
+    def __init__(self):
+        super(SymbolRecognition, self).__init__()
+
+    def Recognize(self, BoundingBoxPath):
+        """
+        try to recognize the content of each BoundingBox by using Tesseract.
+        :param BoundingBoxPath: path to the boundingBox image
+        :type BoundingBoxPath: string
+        """
+        # Open the BoundingBox image
+        im = Image.open(BoundingBoxPath)
+        im.filter(ImageFilter.SHARPEN)
+        # Define the command
+        pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
+        # Send the image to Tesseract to recognize it.
+        print(pytesseract.image_to_string(im, lang='eng', boxes=False,
+                                          config='--psm 10 --eom 3 -c tessedit_char_whitelist=€0123456789'))
+        print(pytesseract.image_to_string(im, boxes=True))
+
