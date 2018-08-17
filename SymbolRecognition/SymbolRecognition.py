@@ -23,6 +23,6 @@ class SymbolRecognition(object):
         pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
         # Send the image to Tesseract to recognize it.
         print(pytesseract.image_to_string(im, lang='eng', boxes=False,
-                                          config='--psm 10 --eom 3 -c tessedit_char_whitelist=€0123456789'))
-        print(pytesseract.image_to_string(im, boxes=True))
+                                         config='--psm 10 --eom 1 -c tessedit_char_'
+                                         'whitelist=-+%ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789'))
 
