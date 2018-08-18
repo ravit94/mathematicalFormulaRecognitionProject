@@ -25,8 +25,13 @@ class SymbolRecognition(object):
         if  symbol == None :
             pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
             # Send the image to Tesseract to recognize it.
-            print(pytesseract.image_to_string(im, lang='eng', boxes=False,
+            tesseractLetter = pytesseract.image_to_string(im, lang='eng', boxes=False,
                                              config='--psm 10 --eom 1 -c tessedit_char_'
-                                             'whitelist=-+%ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789'))
+                                             'whitelist=-+%ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789')
+            if not correlation.IsEqual(BoundingBoxPath, tesseractLetter):
+                symbol = correlation.FindCorrelationCoefficient(BoundingBoxPath)
+                print(symbol)
+            else:
+                print (tesseractLetter)
         else:
             print(symbol)
