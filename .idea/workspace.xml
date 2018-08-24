@@ -1,70 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ad9001b3-f2a0-46be-b211-75fcf668c556" name="Default Changelist" comment="Change the command to tesseruct in order to be able to recognize letters and digits">
+    <list default="true" id="ad9001b3-f2a0-46be-b211-75fcf668c556" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Templates/rightPar1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ex1.PNG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/0.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/8.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/9.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/9.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/A.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/A.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/B.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/B.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/C.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/C.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/D.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/D.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/E.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/E.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/F.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/F.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/G.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/G.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/H.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/H.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/K.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/K.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/N.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/N.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/O.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/O.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/P.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/P.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/Q.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/Q.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/R.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/R.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/S.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/S.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/T.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/T.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/V.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/V.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/W.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/W.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/X.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/X.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/Y.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/Y.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/Z.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/Z.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/aa.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/aa.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/bb.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/bb.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/cc.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/cc.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/dd.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/dd.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/ee.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/ee.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/ff.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/ff.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/gg.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/gg.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/hh.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/hh.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/jj.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/jj.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/kk.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/kk.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/mm.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/mm.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/nn.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/nn.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/oo.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/oo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/pp.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/pp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/qq.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/qq.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/rr.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/rr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/ss.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/ss.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/tt.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/tt.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/uu.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/uu.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/vv.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/vv.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/ww.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/ww.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/xx.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/xx.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/yy.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/yy.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LettersDigits/zz.png" beforeDir="false" afterPath="$PROJECT_DIR$/LettersDigits/zz.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SymbolRecognition/Correlation.py" beforeDir="false" afterPath="$PROJECT_DIR$/SymbolRecognition/Correlation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py" beforeDir="false" afterPath="$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/exe.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/exe_bin.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/exp.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/exp.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/exp_bin.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Templates/leftPar1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Templates/leftPar1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Templates/riethPar1.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,17 +33,17 @@
           <entry key="PNG" value="21" />
           <entry key="bmp" value="81" />
           <entry key="config" value="2" />
-          <entry key="png" value="806" />
-          <entry key="py" value="64" />
+          <entry key="png" value="857" />
+          <entry key="py" value="69" />
           <entry key="txt" value="1" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="908" />
+          <entry key="Image" value="959" />
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="64" />
+          <entry key="Python" value="69" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -108,14 +51,14 @@
         <counts>
           <entry key="Python Console" value="152" />
           <entry key="dummy" value="1" />
-          <entry key="py" value="4782" />
-          <entry key="txt" value="278" />
+          <entry key="py" value="4796" />
+          <entry key="txt" value="293" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="279" />
-          <entry key="Python" value="4934" />
+          <entry key="PLAIN_TEXT" value="294" />
+          <entry key="Python" value="4948" />
         </counts>
       </usages-collector>
     </session>
@@ -125,8 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="29" column="59" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="59" />
+            <state relative-caret-position="233">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -134,7 +77,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
@@ -147,20 +90,20 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LettersDigits/L.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SymbolRecognition/Correlation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+            <state relative-caret-position="272">
+              <caret line="60" column="21" lean-forward="true" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="21" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/5.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
     </leaf>
@@ -194,8 +137,8 @@
         <option value="$PROJECT_DIR$/Templates/Negative.py" />
         <option value="$PROJECT_DIR$/SymbolRecognition/CompareImages.py" />
         <option value="$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py" />
-        <option value="$PROJECT_DIR$/Main.py" />
         <option value="$PROJECT_DIR$/SymbolRecognition/Correlation.py" />
+        <option value="$PROJECT_DIR$/Main.py" />
       </list>
     </option>
   </component>
@@ -229,6 +172,11 @@
               <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
               <item name="SymbolRecognition" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="Templates" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -241,8 +189,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\ravir\PycharmProjects\FinalProject" />
       <recent name="C:\Users\ravir\PycharmProjects\FinalProject\LettersDigits" />
+      <recent name="C:\Users\ravir\PycharmProjects\FinalProject" />
       <recent name="C:\Users\ravir\PycharmProjects\FinalProject\Templates" />
       <recent name="C:\Users\ravir\PycharmProjects\FinalProject\preprocessing" />
       <recent name="C:\Users\ravir\PycharmProjects\FinalProject\Binarization" />
@@ -455,14 +403,29 @@
       <option name="project" value="LOCAL" />
       <updated>1534627495557</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Change the command to tesseruct in order to be able to recognize letters and digits">
+      <created>1535120876707</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1535120876707</updated>
+    </task>
+    <task id="LOCAL-00010" summary="change the path">
+      <created>1535120945096</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1535120945096</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2247191" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2247191" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.4990086" weight="0.32907802" />
       <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.50165236" side_tool="true" weight="0.27234042" />
@@ -470,7 +433,7 @@
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32907802" />
       <window_info anchor="bottom" id="Version Control" order="5" sideWeight="0.49834764" weight="0.32907802" />
-      <window_info anchor="bottom" id="Run" order="6" sideWeight="0.49834764" visible="true" weight="0.27234042" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49834764" visible="true" weight="0.27234042" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.3716312" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -487,11 +450,12 @@
     <MESSAGE value="First Commit" />
     <MESSAGE value="Delete the boundingboxs" />
     <MESSAGE value="Convert the code to classes" />
-    <MESSAGE value="Change the command to tesseruct in order to be able to recognize letters and digits" />
     <MESSAGE value="Recognize Symbols by Tesserect or correltion method" />
     <MESSAGE value="Templates of letters and digits" />
     <MESSAGE value="Choose the best recognition" />
-    <option name="LAST_COMMIT_MESSAGE" value="Choose the best recognition" />
+    <MESSAGE value="Change the command to tesseruct in order to be able to recognize letters and digits" />
+    <MESSAGE value="change the path" />
+    <option name="LAST_COMMIT_MESSAGE" value="change the path" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -517,27 +481,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/LettersDigits/JJ.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LettersDigits/7.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LettersDigits/9.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LettersDigits/2.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LettersDigits/z.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LettersDigits/YY.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LettersDigits/WW.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/LettersDigits/VV.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -548,9 +491,6 @@
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/LettersDigits/1.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LettersDigits/SS.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/LettersDigits/4.png">
@@ -566,34 +506,7 @@
     <entry file="file://$PROJECT_DIR$/20.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/4.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/13.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/22.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/8.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/6.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/7.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/9.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/10.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/11.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/12.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/21.png">
@@ -620,9 +533,6 @@
     <entry file="file://$PROJECT_DIR$/15.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/14.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/16.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -632,42 +542,110 @@
     <entry file="file://$PROJECT_DIR$/LettersDigits/3.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/LettersDigits/0.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/5.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/1.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/18.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/17.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/LettersDigits/LL.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/LettersDigits/L.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/LettersDigits/LL.png">
+    <entry file="file://$PROJECT_DIR$/preprocessing/BoundingBoxes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Templates/tite.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LettersDigits/0.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LettersDigits/o.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/4.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Templates/leftPar1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Templates/rightPar1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Templates/leftPar.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/7.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/8.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/9.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/10.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/11.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/12.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/13.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/14.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/6.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LettersDigits/OO.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="29" column="59" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="59" />
+        <state relative-caret-position="233">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LettersDigits/SS.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SymbolRecognition/Correlation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="60" column="21" lean-forward="true" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/5.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -675,16 +653,6 @@
           <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SymbolRecognition/Correlation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

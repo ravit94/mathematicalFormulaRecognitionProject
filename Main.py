@@ -2,7 +2,7 @@ from preprocessing.OtsuMethod import OtsuMethod
 from preprocessing.BoundingBoxes import BoundingBoxes
 from SymbolRecognition.SymbolRecognition import SymbolRecognition
 
-imagePath = "exp.PNG"
+imagePath = "ex1.PNG"
 otsu = OtsuMethod()
 boundingBoxes = BoundingBoxes()
 symbolRecognition = SymbolRecognition()
