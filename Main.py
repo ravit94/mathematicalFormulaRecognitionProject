@@ -2,7 +2,7 @@ from preprocessing.OtsuMethod import OtsuMethod
 from preprocessing.BoundingBoxes import BoundingBoxes
 from SymbolRecognition.SymbolRecognition import SymbolRecognition
 
-imagePath = "C:\\Users\\ravir\\PycharmProjects\\FinalProject\\exp.PNG"
+imagePath = "exp.PNG"
 otsu = OtsuMethod()
 boundingBoxes = BoundingBoxes()
 symbolRecognition = SymbolRecognition()
