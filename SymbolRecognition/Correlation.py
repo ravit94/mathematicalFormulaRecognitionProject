@@ -1,9 +1,6 @@
 import os
 from PIL import Image
 
-from scipy import signal
-
-
 class Correlation(object):
     """
     Correlation method aim is to find the correlation between BB to one of the templates.
@@ -21,17 +18,22 @@ class Correlation(object):
         """
         size = 500
         imageA = Image.open(bb)
+        # a dictionary that save the error of each template/
         gaps = {}
         # Resize it.
         img = imageA.resize((size, size), Image.BILINEAR)
         templates = os.listdir("Templates")
+        # go over all the templates and insert to gaps.
         for template in templates:
             imageB = Image.open("Templates\\" + template)
             diff = self.CompareImages(imageA, imageB)
             gaps.update({template: diff})
+        # find the smallest error.
         minDiff = min(gaps.items(), key = lambda x: x[1])
+        # if the smallest error is bigger then 20 so None of the template is similar enough.
         if minDiff[1] > 20:
             return None
+        # return the name of the most similar template.
         return minDiff[0]
 
     def IsEqual(self, bb, symbol):
@@ -44,14 +46,18 @@ class Correlation(object):
         """
         # Resize it.
         size = 500
-        if symbol.islower():
+        # we save the upper as dabble.
+        if symbol.isupper():
             symbol = symbol + symbol
-        path = "C:\\Users\\ravir\\PycharmProjects\\FinalProject\\LettersDigits\\" + symbol + ".png"
+        path = "LettersDigits\\" + symbol + ".png"
+        # check if exist.
         if not os.path.isfile(path):
             return False
+        # open the images.
         imageA = Image.open(bb)
         imageB = Image.open(path)
         diff = self.CompareImages(imageA, imageB)
+        # check if the two given images are equal.
         if diff > 20:
             return False
         return True
@@ -76,6 +82,7 @@ class Correlation(object):
         img2 = imageB.resize((size, height), Image.BILINEAR)
         pairs = zip(img.getdata(), img2.getdata())
         dif = 0
+        # calculate the correlation coefficient.
         for p1, p2 in pairs:
             for x, y in zip(p1, p2):
                 dif = dif + abs(x - y)

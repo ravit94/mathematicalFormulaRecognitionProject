@@ -18,20 +18,16 @@ class SymbolRecognition(object):
         """
         # Open the BoundingBox image
         im = Image.open(BoundingBoxPath)
+        exceptionals = ['-', '+']
         im.filter(ImageFilter.SHARPEN)
         # Define the command
         correlation = Correlation()
-        symbol = correlation.FindCorrelationCoefficient(BoundingBoxPath)
-        if  symbol == None :
-            pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
-            # Send the image to Tesseract to recognize it.
-            tesseractLetter = pytesseract.image_to_string(im, lang='eng', boxes=False,
-                                             config='--psm 10 --eom 1 -c tessedit_char_'
-                                             'whitelist=-+%ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789')
-            if not correlation.IsEqual(BoundingBoxPath, tesseractLetter):
+        pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
+        # Send the image to Tesseract to recognize it.
+        symbol = pytesseract.image_to_string(im, lang='eng', boxes=False,
+                                                      config='--psm 10 --eom 1 -c tessedit_char_'
+                                                             'whitelist=-+%ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789')
+        if not correlation.IsEqual(BoundingBoxPath, symbol) and symbol not in exceptionals:
                 symbol = correlation.FindCorrelationCoefficient(BoundingBoxPath)
-                print(symbol)
-            else:
-                print (tesseractLetter)
-        else:
-            print(symbol)
+
+        print(symbol)

@@ -8,4 +8,4 @@ boundingBoxes = BoundingBoxes()
 symbolRecognition = SymbolRecognition()
 boxes = boundingBoxes.SegmentImageToBoxes(otsu.ConvertToBinaryImage(imagePath))
 for box in boxes:
-    symbolRecognition.Recognize(box)
+   symbolRecognition.Recognize(box)
