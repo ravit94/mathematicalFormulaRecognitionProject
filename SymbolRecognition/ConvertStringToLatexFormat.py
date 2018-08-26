@@ -15,11 +15,58 @@ class ConvertStringToLatexFormat(object):
       :type symbol: string
       """
 
-      if symbol.startswith('infinity'):
-          return 'inf'
-      elif symbol.startswith('sigma'):
-          return 'sig'
+      if symbol.startswith('alpha'):
+          return '\\alpha'
+      elif symbol.startswith('beta'):
+          return '\\beta'
+      elif symbol.startswith('bigger'):
+          return '>'
+      elif symbol.startswith('dot'):
+          return '\cdot'
+      elif symbol.startswith('epsilon'):
+          return '\epsilon'
+      elif symbol.startswith('fi'):
+          return '\phi'
+      elif symbol.startswith('frac'):
+          return 'frac'
+      elif symbol.startswith('gama'):
+          return '\gamma'
+      elif symbol.startswith('infinity'):
+          return '\infty'
+      elif symbol.startswith('integral'):
+          return '\int'
+      elif symbol.startswith('lambda'):
+          return '\lambda'
+      elif symbol.startswith('leftArrow'):
+          return '\leftarrow'
+      elif symbol.startswith('leftPar'):
+          return '\left ( '
+      elif symbol.startswith('mult'):
+          return 'X'
+      elif symbol.startswith('omega'):
+          return '\omega'
+      elif symbol.startswith('pi'):
+          return '\pi'
+      elif symbol.startswith('plus'):
+          return '+'
+      elif symbol.startswith('rightPar'):
+          return '\\right )'
+      elif symbol.startswith('sig'):
+          return '\sum'
+      elif symbol.startswith('smaller'):
+          return '<'
+      elif symbol.startswith('prod'):
+          return '\prod'
+      elif symbol.startswith('sqrt'):
+          return '\sqrt'
+      elif symbol.startswith('teta'):
+          return '\Theta'
+      elif symbol.startswith('uneqal'):
+          return '\\neq'
+      elif symbol.startswith('uonin'):
+          return '\\bigcap'
+
 
 temp = ConvertStringToLatexFormat()
-res = temp.ConvertToLatexFormat("infinity234")
+res = temp.ConvertToLatexFormat("rightPar234")
 print (res)
