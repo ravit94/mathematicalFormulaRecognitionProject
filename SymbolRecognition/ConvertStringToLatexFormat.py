@@ -66,7 +66,6 @@ class ConvertStringToLatexFormat(object):
       elif symbol.startswith('uonin'):
           return '\\bigcap'
 
-
 temp = ConvertStringToLatexFormat()
-res = temp.ConvertToLatexFormat("rightPar234")
+res = temp.ConvertToLatexFormat("prod44234")
 print (res)
