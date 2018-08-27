@@ -9,9 +9,9 @@ class ConvertStringToLatexFormat(object):
 
    def ConvertToLatexFormat(self, symbol):
       """
-      This function receive the symbol that recognized by tesseract
+      This function receive the symbol that recognized by Tesseract
       or by correlation coefficient and return the symbol in latex format.
-      :param symbol: recognized by tesseract or by correlation coefficient
+      :param symbol: recognized by Tesseract or by correlation coefficient
       :type symbol: string
       """
 
@@ -25,11 +25,11 @@ class ConvertStringToLatexFormat(object):
           return '\cdot'
       elif symbol.startswith('epsilon'):
           return '\epsilon'
-      elif symbol.startswith('fi'):
+      elif symbol.startswith('phi'):
           return '\phi'
       elif symbol.startswith('frac'):
-          return 'frac'
-      elif symbol.startswith('gama'):
+          return '\\frac'
+      elif symbol.startswith('gamma'):
           return '\gamma'
       elif symbol.startswith('infinity'):
           return '\infty'
@@ -49,6 +49,8 @@ class ConvertStringToLatexFormat(object):
           return '\pi'
       elif symbol.startswith('plus'):
           return '+'
+      elif symbol.startswith('rightArrow'):
+          return '\\rightarrow'
       elif symbol.startswith('rightPar'):
           return '\\right )'
       elif symbol.startswith('sig'):
@@ -59,13 +61,13 @@ class ConvertStringToLatexFormat(object):
           return '\prod'
       elif symbol.startswith('sqrt'):
           return '\sqrt'
-      elif symbol.startswith('teta'):
+      elif symbol.startswith('Theta'):
           return '\Theta'
-      elif symbol.startswith('uneqal'):
+      elif symbol.startswith('Unequal'):
           return '\\neq'
-      elif symbol.startswith('uonin'):
-          return '\\bigcap'
+      elif symbol.startswith('Union'):
+          return '\cup'
 
 temp = ConvertStringToLatexFormat()
-res = temp.ConvertToLatexFormat("prod44234")
-print (res)
+res = temp.ConvertToLatexFormat("leftPar44234")
+print(res)
