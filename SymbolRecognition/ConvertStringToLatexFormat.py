@@ -14,7 +14,8 @@ class ConvertStringToLatexFormat(object):
       :param symbol: recognized by Tesseract or by correlation coefficient
       :type symbol: string
       """
-
+      if symbol == None:
+          return None
       if symbol.startswith('alpha'):
           return '\\alpha'
       elif symbol.startswith('beta'):
@@ -67,7 +68,5 @@ class ConvertStringToLatexFormat(object):
           return '\\neq'
       elif symbol.startswith('Union'):
           return '\cup'
-
-temp = ConvertStringToLatexFormat()
-res = temp.ConvertToLatexFormat("leftPar44234")
-print(res)
+      else:
+          return symbol

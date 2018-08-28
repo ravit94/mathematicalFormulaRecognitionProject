@@ -30,4 +30,4 @@ class SymbolRecognition(object):
         if not correlation.IsEqual(BoundingBoxPath, symbol) and symbol not in exceptionals:
                 symbol = correlation.FindCorrelationCoefficient(BoundingBoxPath)
 
-        print(symbol)
+        return symbol
