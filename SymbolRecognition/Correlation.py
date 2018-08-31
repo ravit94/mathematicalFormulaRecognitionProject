@@ -8,6 +8,7 @@ class Correlation(object):
 
     def __init__(self):
         super(Correlation, self).__init__()
+        self.mostCOmmon = ["frac.png", "infinity.png", "infinity2.png", "integral.png", "pi.png"]
 
     def FindCorrelationCoefficient(self, bb):
         """
@@ -18,23 +19,27 @@ class Correlation(object):
         """
         size = 500
         imageA = Image.open(bb)
-        # a dictionary that save the error of each template/
+        # a dictionary that save the error of each template
         gaps = {}
         # Resize it.
         img = imageA.resize((size, size), Image.BILINEAR)
         templates = os.listdir("Templates")
-        # go over all the templates and insert to gaps.
+        # go over all the templates and insert to gaps, start with the most common
+        for template in self.mostCOmmon:
+            imageB = Image.open("Templates\\" + template)
+            diff = self.CompareImages(imageA, imageB)
+            templates.remove(template)
+            # find the smallest error.
+            if diff < 20:
+                return template
         for template in templates:
             imageB = Image.open("Templates\\" + template)
             diff = self.CompareImages(imageA, imageB)
-            gaps.update({template: diff})
-        # find the smallest error.
-        minDiff = min(gaps.items(), key = lambda x: x[1])
-        # if the smallest error is bigger then 20 so None of the template is similar enough.
-        if minDiff[1] > 20:
-            return None
+            # find the smallest error.
+            if diff < 20:
+                return template
         # return the name of the most similar template.
-        return minDiff[0]
+        return None
 
     def IsEqual(self, bb, symbol):
         """
