@@ -14,6 +14,8 @@ class ConvertStringToLatexFormat(object):
       :param symbol: recognized by Tesseract or by correlation coefficient
       :type symbol: string
       """
+      if symbol == None:
+          return None
       if symbol.startswith('alpha'):
           return '\\alpha'
       elif symbol.startswith('beta'):
@@ -46,8 +48,6 @@ class ConvertStringToLatexFormat(object):
           return '\omega'
       elif symbol.startswith('pi'):
           return '\pi'
-      elif symbol.startswith('plus'):
-          return '+'
       elif symbol.startswith('rightArrow'):
           return '\\rightarrow'
       elif symbol.startswith('rightPar'):
