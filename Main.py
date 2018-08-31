@@ -10,14 +10,15 @@ otsu = OtsuMethod()
 boundingBoxes = BoundingBoxes()
 symbolRecognition = SymbolRecognition()
 convertStringToLatexFormat = ConvertStringToLatexFormat()
+# get the path to rows directory
 binaryImageDirPath = otsu.ConvertToBinaryImage(imagePath)
 rows = os.listdir(binaryImageDirPath)
 for row in rows:
     res = symbolRecognition.ocr(binaryImageDirPath+ "//" + row)
     if res == '':
         boxes = boundingBoxes.SegmentImageToBoxes(binaryImageDirPath + "//" + row)
-        print (boxes)
+        print(boxes)
     else:
-        print (res)
-
+        print(res)
+# delete the temporary directory
 shutil.rmtree(binaryImageDirPath)

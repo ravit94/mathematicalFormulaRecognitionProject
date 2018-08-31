@@ -61,6 +61,6 @@ class BoundingBoxes(object):
          elif value in self.skipTwiceList:
             self.skip = 2
       shutil.rmtree(directory)
-      # Return array of boundingBoxes
+      # Return array of boundingBoxes sorted by
       return sorted(boundingBoxes.items())
 

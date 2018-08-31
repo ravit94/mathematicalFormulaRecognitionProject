@@ -43,7 +43,7 @@ class SymbolRecognition(object):
 
     def ocr(self, BoundingBoxPath):
         """
-        try to recognize the content of each BoundingBox by using Tesseract.
+        try to recognize the content of each BoundingBox by using Tesseract in case all the row is text.
         :param BoundingBoxPath: path to the boundingBox image
         :type BoundingBoxPath: string
         """

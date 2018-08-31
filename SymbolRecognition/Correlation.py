@@ -49,7 +49,7 @@ class Correlation(object):
         # we save the upper as dabble.
         if symbol.isupper():
             symbol = symbol + symbol
-        path = "LettersDigits\\" + symbol + ".png"
+        path = "Digits&Letters\\" + symbol + ".png"
         # check if exist.
         if not os.path.isfile(path):
             return False
