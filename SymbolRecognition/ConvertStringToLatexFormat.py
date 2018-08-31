@@ -14,8 +14,6 @@ class ConvertStringToLatexFormat(object):
       :param symbol: recognized by Tesseract or by correlation coefficient
       :type symbol: string
       """
-      if symbol == None:
-          return None
       if symbol.startswith('alpha'):
           return '\\alpha'
       elif symbol.startswith('beta'):

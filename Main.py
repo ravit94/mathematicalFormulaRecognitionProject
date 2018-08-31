@@ -8,5 +8,4 @@ boundingBoxes = BoundingBoxes()
 symbolRecognition = SymbolRecognition()
 convertStringToLatexFormat = ConvertStringToLatexFormat()
 boxes = boundingBoxes.SegmentImageToBoxes(otsu.ConvertToBinaryImage(imagePath))
-for box in boxes:
-   print(convertStringToLatexFormat.ConvertToLatexFormat(symbolRecognition.Recognize(box)))
+print (boxes)

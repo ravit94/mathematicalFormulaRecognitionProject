@@ -1,5 +1,8 @@
 import cv2
-
+from SymbolRecognition.SymbolRecognition import SymbolRecognition
+import collections
+import os
+import shutil
 
 class BoundingBoxes(object):
    """
@@ -8,6 +11,8 @@ class BoundingBoxes(object):
 
    def __init__(self):
       super(BoundingBoxes, self).__init__()
+      self.symbolRecognition = SymbolRecognition()
+      self.skipList = ["e", "d", "\\alpha", "\\beta", "\infty", "\lambda"]
 
    def SegmentImageToBoxes(self, binaryImagePath):
       """
@@ -25,7 +30,7 @@ class BoundingBoxes(object):
       ret, thresh = cv2.threshold(im2, 127, 255, 0)
       # Find all the contours using openCV function.
       im3, contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-      boundingBoxes = []
+      boundingBoxes = {}
       #ToDo - check if the boundongBoxes are atomic.
       # for each boundingBoxes - save as image.
       for i in range(1, len(contours)):
@@ -34,8 +39,16 @@ class BoundingBoxes(object):
          x, y, w, h = cv2.boundingRect(currentBoundingBox)
          # Crop each box in the image and save it.
          letter = image[y:y + h, x:x + w]
-         cv2.imwrite(str(i) + '.png', letter)
-         boundingBoxes.append(str(i) + '.png')
+         file_path = "C:/temp/" + str(i) + '.png'
+         directory = os.path.dirname(file_path)
+         try:
+            os.stat(directory)
+         except:
+            os.mkdir(directory)
+            # all the information about this boundingBox
+         cv2.imwrite(file_path, letter)
+         boundingBoxes.update({x: {"x": x, "y": y, "h": h, "w": w, "value": self.symbolRecognition.Recognize(file_path)}})
+      shutil.rmtree(directory)
       # Return array of boundingBoxes
-      return boundingBoxes
+      return sorted(boundingBoxes.items())
 
