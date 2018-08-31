@@ -35,7 +35,7 @@ class ConvertStringToLatexFormat(object):
       elif symbol.startswith('infinity'):
           return '\infty'
       elif symbol.startswith('integral'):
-          return '\int'
+          return '\int_'
       elif symbol.startswith('lambda'):
           return '\lambda'
       elif symbol.startswith('leftArrow'):
