@@ -12,7 +12,11 @@ class BoundingBoxes(object):
    def __init__(self):
       super(BoundingBoxes, self).__init__()
       self.symbolRecognition = SymbolRecognition()
-      self.skipList = ["e", "d", "\\alpha", "\\beta", "\infty", "\lambda"]
+      # openCV return the inside of this symbols as another BB so we will skip over them.
+      self.skipOnceList = ["e", "d", "\\alpha", "\lambda", "0", "6", "9", "a", "b", "g", "o", "p", "O", "P", "Q", "A"]
+      self.skipTwiceList = ["\infty", "Theta", "8", "B", "\\beta"]
+      # number of times we need to skip
+      self.skip = 0
 
    def SegmentImageToBoxes(self, binaryImagePath):
       """
@@ -34,6 +38,9 @@ class BoundingBoxes(object):
       #ToDo - check if the boundongBoxes are atomic.
       # for each boundingBoxes - save as image.
       for i in range(1, len(contours)):
+         if self.skip > 0:
+            self.skip = self.skip -1
+            continue
          currentBoundingBox = contours[i]
          # The coordinate of the boundingBoxes.
          x, y, w, h = cv2.boundingRect(currentBoundingBox)
@@ -47,7 +54,12 @@ class BoundingBoxes(object):
             os.mkdir(directory)
             # all the information about this boundingBox
          cv2.imwrite(file_path, letter)
-         boundingBoxes.update({x: {"x": x, "y": y, "h": h, "w": w, "value": self.symbolRecognition.Recognize(file_path)}})
+         value = self.symbolRecognition.Recognize(file_path)
+         boundingBoxes.update({x: {"x": x, "y": y, "h": h, "w": w, "value": value}})
+         if value in self.skipOnceList:
+            self.skip = 1
+         elif value in self.skipTwiceList:
+            self.skip = 2
       shutil.rmtree(directory)
       # Return array of boundingBoxes
       return sorted(boundingBoxes.items())
