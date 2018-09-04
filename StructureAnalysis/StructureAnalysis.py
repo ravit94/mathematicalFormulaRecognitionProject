@@ -1,4 +1,3 @@
-from PIL import Image
 
 class StructureAnalysis(object):
     """
@@ -22,25 +21,35 @@ class StructureAnalysis(object):
                 xStartBound = box[1]["x"]
                 xEndBound = box[1]["x"] + box[1]["w"]
                 for bb in boxes:
+                    if bb == {0}:
+                        continue
                     # add the bb that above or below the fracture line.
-                    if bb[1]["x"] > xStartBound and bb[1]["x"] + bb[1]["w"] < xEndBound:
+                    if (bb[1]["x"] > xStartBound and bb[1]["x"] + bb[1]["w"] < xEndBound) or bb[1]["x"] == xStartBound:
                         fracDict.append(bb)
                     # if not the first bb - break from loop.
-                    elif bb[1]["x"] != xStartBound:
+                    elif bb[1]["x"] > xStartBound:
                         break
                 resultString = resultString + self._FractureHandling(fracDict, box[1]["y"])
+                # remove all the element we analyzed.
                 for element in fracDict:
                     boxes.remove(element)
+                boxes.insert(0, {0})
             elif box[1]["value"] == '\int_':
                 integralDict = []
                 xStartBound = box[1]["x"]
+                integralDict.append(box)
                 for bb in boxes:
-                    # add the bb that above or below the fracture line.
+                    if bb == {0}:
+                        continue
+                    # add the bb that part of the integral.
                     if bb[1]["x"] > xStartBound and bb[1]["value"] != "d":
                         integralDict.append(bb)
-                    # if not the first bb - break from loop.
+                    # content of integral end with "dx".
                     elif bb[1]["value"] == "d":
-                        break
+                        integralDict.append(bb)
+                        if boxes.__getitem__(boxes.index(bb)+1)[1]["value"] == "x":
+                            integralDict.append(boxes.__getitem__(boxes.index(bb)+1))
+                            break
                 resultString = resultString + self._IntegralHandling(integralDict, box[1]["y"], box[1]["h"])
                 for element in integralDict:
                     boxes.remove(element)
@@ -59,6 +68,8 @@ class StructureAnalysis(object):
         numeratorDict = []
         denominatorDict = []
         for box in boxes:
+            if box[1]["value"] == '\\frac':
+                continue
             if box[1]["y"] < yCoordinate:
                 numeratorDict.append(box)
             else:
@@ -81,12 +92,18 @@ class StructureAnalysis(object):
         lowerDict = []
         contentDict = []
         for box in boxes:
+            if box[1]["value"] == '\int_':
+                continue
             if box[1]["y"] < yCoordinate:
                 upperDict.append(box)
-            elif box[1]["y"] > yCoordinate + height - 20:
+            elif box[1]["y"] > yCoordinate + height - 30:
                 lowerDict.append(box)
             else:
-                contentDict.append(box)
+                i = boxes.index(box)
+                size = len(boxes)
+                for box in range(i, size):
+                    contentDict.append(boxes.__getitem__(box))
+                break
         lower = self.StructureAnalysis(lowerDict)
         upper = self.StructureAnalysis(upperDict)
         content = self.StructureAnalysis(contentDict)
