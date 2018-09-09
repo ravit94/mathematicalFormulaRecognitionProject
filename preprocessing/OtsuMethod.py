@@ -74,7 +74,7 @@ class OtsuMethod(object):
             h = (lowers[i] - uppers[i]) + 40
             if flag:
                 y = y - 50
-                h = h + 40
+                h = h + 50
             row = image[y:y + h, x:x + W]
             cv.imwrite(file_path, row)
             i += 1

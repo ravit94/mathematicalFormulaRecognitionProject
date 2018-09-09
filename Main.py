@@ -17,7 +17,7 @@ binaryImageDirPath = otsu.ConvertToBinaryImage(imagePath)
 rows = os.listdir(binaryImageDirPath)
 for row in rows:
     res = symbolRecognition.ocr(binaryImageDirPath+ "//" + row)
-    if res == '':
+    if res == '' or res.__contains__("\n"):
         boxes = boundingBoxes.SegmentImageToBoxes(binaryImageDirPath + "//" + row)
         print(structureAnalysis.StructureAnalysis(boxes))
     else:

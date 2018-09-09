@@ -120,7 +120,8 @@ class StructureAnalysis(object):
             else:
                 # recognize exponent relation
                 if i > 0:
-                    if boxes[i][1]["y"] + 0.6 * boxes[i][1]["h"] < boxes[i-1][1]["y"] + 0.6 * boxes[i-1][1]["h"] and  \
+                    if boxes[i][1]["y"] + 0.6 * boxes[i][1]["h"] < boxes[i-1][1]["y"] + 0.6 * boxes[i-1][1]["h"] and \
+                            abs((boxes[i][1]["y"] + boxes[i][1]["h"]) - (boxes[i-1][1]["y"] + boxes[i-1][1]["h"])) > 10 and \
                             boxes[i][1]["value"] not in self.exception and boxes[i-1][1]["value"] not in self.exception:
                         resultString = resultString + "^{"
                         j = i
@@ -228,4 +229,4 @@ class StructureAnalysis(object):
         if boxes[i][1]["x"] == lastXcoordinate:
             contentDict.append(boxes[i])
         content = self.RecAnalysis(contentDict)
-        return "\sqrt{}".format(content), i+1
+        return "\sqrt{" + content + "}", i+1

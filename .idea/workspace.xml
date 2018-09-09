@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad9001b3-f2a0-46be-b211-75fcf668c556" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Templates/Theta3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/co.PNG" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/eq.PNG" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/hl.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sqr.PNG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StructureAnalysis/StructureAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/StructureAnalysis/StructureAnalysis.py" afterDir="false" />
@@ -32,12 +33,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="PNG" value="34" />
+          <entry key="PNG" value="37" />
           <entry key="bmp" value="81" />
           <entry key="config" value="2" />
           <entry key="jpg" value="2" />
-          <entry key="png" value="915" />
-          <entry key="py" value="89" />
+          <entry key="png" value="920" />
+          <entry key="py" value="92" />
           <entry key="thumbnail" value="1" />
           <entry key="txt" value="1" />
           <entry key="xml" value="1" />
@@ -45,47 +46,35 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="1032" />
+          <entry key="Image" value="1040" />
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="89" />
+          <entry key="Python" value="92" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="727" />
+          <entry key="Python Console" value="731" />
           <entry key="dummy" value="1" />
-          <entry key="py" value="11447" />
-          <entry key="txt" value="560" />
+          <entry key="py" value="11519" />
+          <entry key="txt" value="566" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="561" />
-          <entry key="Python" value="12174" />
+          <entry key="PLAIN_TEXT" value="567" />
+          <entry key="Python" value="12250" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="160">
+              <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
@@ -96,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/preprocessing/OtsuMethod.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="81" selection-start-line="81" selection-end-line="81" />
+            <state relative-caret-position="258">
+              <caret line="76" column="25" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -106,18 +95,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/result.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/StructureAnalysis/StructureAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="123" column="84" selection-start-line="123" selection-start-column="84" selection-end-line="123" selection-end-column="84" />
+            <state relative-caret-position="84">
+              <caret line="123" column="113" selection-start-line="123" selection-start-column="113" selection-end-line="123" selection-end-column="113" />
               <folding>
-                <marker date="1536493691006" expanded="true" signature="331:7481" ph="..." />
-                <marker date="1536493691006" expanded="true" signature="4738:4747" ph="..." />
+                <marker date="1536503506425" expanded="true" signature="326:7601" ph="..." />
+                <marker date="1536503506425" expanded="true" signature="4733:4742" ph="..." />
               </folding>
             </state>
           </provider>
@@ -126,13 +110,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/preprocessing/BoundingBoxes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
+            <state relative-caret-position="207">
               <caret line="63" selection-start-line="63" selection-end-line="63" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sqr.PNG">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
     </leaf>
@@ -148,6 +137,7 @@
     <findStrings>
       <find>)</find>
       <find>ssim</find>
+      <find>=</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -167,9 +157,9 @@
         <option value="$PROJECT_DIR$/SymbolRecognition/Correlation.py" />
         <option value="$PROJECT_DIR$/SymbolRecognition/ConvertStringToLatexFormat.py" />
         <option value="$PROJECT_DIR$/preprocessing/BoundingBoxes.py" />
-        <option value="$PROJECT_DIR$/Main.py" />
         <option value="$PROJECT_DIR$/preprocessing/OtsuMethod.py" />
         <option value="$PROJECT_DIR$/StructureAnalysis/StructureAnalysis.py" />
+        <option value="$PROJECT_DIR$/Main.py" />
       </list>
     </option>
   </component>
@@ -195,6 +185,11 @@
             </path>
             <path>
               <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="preprocessing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -210,9 +205,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ravir\PycharmProjects\FinalProject" />
+      <recent name="C:\Users\ravir\PycharmProjects\FinalProject\Templates" />
       <recent name="C:\Users\ravir\PycharmProjects\FinalProject\Digits&amp;Letters" />
       <recent name="C:\Users\ravir\PycharmProjects\FinalProject\LettersDigits" />
-      <recent name="C:\Users\ravir\PycharmProjects\FinalProject\Templates" />
       <recent name="C:\Users\ravir\PycharmProjects\FinalProject\preprocessing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -549,12 +544,18 @@
       <option name="project" value="LOCAL" />
       <updated>1536479004952</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="recognize integral, fracture, sqrt and exponent structure">
+      <created>1536493934900</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1536493934900</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.14210178" />
@@ -635,7 +636,8 @@
     <MESSAGE value="recognize fracture structure" />
     <MESSAGE value="recognize integral and fracture structure" />
     <MESSAGE value="recognize integral, fracture and exponent structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="recognize integral, fracture and exponent structure" />
+    <MESSAGE value="recognize integral, fracture, sqrt and exponent structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="recognize integral, fracture, sqrt and exponent structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -656,15 +658,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/13.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/14.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/22.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/exp_bin.PNG">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -693,12 +686,6 @@
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Templates/mult.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Templates/Theta2.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Templates/Theta.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Templates/Union.png">
@@ -760,13 +747,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/PIL/Image.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="2572" selection-start-line="2572" selection-end-line="2572" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SymbolRecognition/Correlation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7">
@@ -804,16 +784,6 @@
     <entry file="file://$PROJECT_DIR$/Digits&amp;Letters/4.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
@@ -821,12 +791,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Templates/Theta.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Templates/Theta2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SymbolRecognition/SymbolRecognition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="41" column="34" lean-forward="true" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/PIL/_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/PIL/Image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="2616" selection-start-line="2616" selection-end-line="2616" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SymbolRecognition/ConvertStringToLatexFormat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="62" column="35" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sqr.PNG">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/co.PNG">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/result.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/preprocessing/OtsuMethod.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="76" column="25" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/preprocessing/BoundingBoxes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
+        <state relative-caret-position="207">
           <caret line="63" selection-start-line="63" selection-end-line="63" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
@@ -834,40 +857,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SymbolRecognition/ConvertStringToLatexFormat.py">
+    <entry file="file://$PROJECT_DIR$/StructureAnalysis/StructureAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
+        <state relative-caret-position="84">
+          <caret line="123" column="113" selection-start-line="123" selection-start-column="113" selection-end-line="123" selection-end-column="113" />
+          <folding>
+            <marker date="1536503506425" expanded="true" signature="326:7601" ph="..." />
+            <marker date="1536503506425" expanded="true" signature="4733:4742" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="160">
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/OtsuMethod.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="81" selection-start-line="81" selection-end-line="81" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/StructureAnalysis/StructureAnalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="123" column="84" selection-start-line="123" selection-start-column="84" selection-end-line="123" selection-end-column="84" />
-          <folding>
-            <marker date="1536493691006" expanded="true" signature="331:7481" ph="..." />
-            <marker date="1536493691006" expanded="true" signature="4738:4747" ph="..." />
           </folding>
         </state>
       </provider>
