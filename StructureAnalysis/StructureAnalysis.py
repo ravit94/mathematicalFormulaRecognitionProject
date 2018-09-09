@@ -6,6 +6,73 @@ class StructureAnalysis(object):
 
     def __init__(self):
         super(StructureAnalysis, self).__init__()
+        self.spacialList = ["frac", "int"]
+
+    def Preprocessing(self, boxes):
+        """
+        find the spacial relationship between given BB dictionary and add elements to help analysis process.
+        :param boxes: all the information about the boundingBoxes in the current row.
+        :type boxes: Dictionary
+        """
+        i = 0
+
+        while i != len(boxes):
+            if boxes[i][1]["value"] == '\\frac':
+                lastXcoordinate = 0
+                data = {"maxY": 1000, "minY": 0, "xCoordinate": 0, "yCoordinate": 0, "isFirst": False}
+                xStartBound = boxes[i][1]["x"]
+                xEndBound = boxes[i][1]["x"] + boxes[i][1]["w"]
+                for j in range(i, len(boxes)):
+                    # add the bb that above or below the fracture line.
+                    if (boxes[j][1]["x"] > xStartBound and boxes[j][1]["x"] + boxes[j][1]["w"] < xEndBound) or boxes[j][1]["x"] == xStartBound:
+                        if boxes[j][1]["y"] < boxes[i][1]["y"] and boxes[j][1]["y"] < data["maxY"]:
+                            if not data["isFirst"]:
+                                data["xCoordinate"] = boxes[j][1]["x"]
+                                data["yCoordinate"] = boxes[j][1]["y"]
+                                data["isFirst"] = True
+                            data["maxY"] = boxes[j][1]["y"]
+                        elif boxes[j][1]["y"] > boxes[i][1]["y"] and boxes[j][1]["y"] + boxes[j][1]["h"] > data["minY"]:
+                            data["minY"] = boxes[j][1]["y"] + boxes[j][1]["h"]
+                        lastXcoordinate = boxes[j][1]["x"]
+                    # if not the first bb - break from loop.
+                    elif boxes[j][1]["x"] > xStartBound:
+                        break
+                boxes.insert(i, (xStartBound, {"x": data["xCoordinate"], "y":  data["yCoordinate"],
+                                               "h":  data["minY"] - data["maxY"],
+                                               "w": boxes[i][1]["w"], "value": "frac {}".format(lastXcoordinate)}))
+                i += 1
+            if boxes[i][1]["value"] == '\int_':
+                lastXcoordinate = 0
+                for j in range(i, len(boxes)):
+                    # add the bb that part of the integral.
+                    if boxes[j][1]["value"] != "d":
+                        continue
+                    # content of integral end with "dx".
+                    elif boxes[j][1]["value"] == "d":
+                        if boxes[j + 1][1]["value"] == "x":
+                            lastXcoordinate = boxes[j+1][1]["x"]
+                        break
+                boxes.insert(i, (boxes[i][1]["x"], {"x":boxes[i][1]["x"], "y": boxes[i][1]["y"], "h": boxes[i][1]["h"],
+                                "w": boxes[j + 1][1]["w"] + boxes[j + 1][1]["x"] - boxes[i][1]["x"],
+                                "value": "int {}".format(lastXcoordinate)}))
+                i += 1
+            i += 1
+        i = 1
+        return boxes
+
+    def _NextIndex(self, box, boxes):
+        """
+        return the next index
+        :param box: first BB
+        :type box: Dictionary
+        """
+        required = box[1]["value"].split(" ")[1]
+        for i in range(boxes.index(box), len(boxes)):
+            if boxes[i][1]["x"] == required:
+                return i
+        return None
+
+
 
     def StructureAnalysis(self, boxes):
         """
@@ -14,98 +81,105 @@ class StructureAnalysis(object):
         :param boxes: all the information about the boundingBoxes in the current row.
         :type boxes: Dictionary
         """
+        return self.RecAnalysis(self.Preprocessing(boxes))
+
+    def RecAnalysis(self, boxes):
+        """
+        find the relationship between given BB dictionary that represent row in the image ans return
+        string in Latex format of the current row.
+        :param boxes: all the information about the boundingBoxes in the current row.
+        :type boxes: Dictionary
+        """
         resultString = ""
-        for box in boxes:
-            if box[1]["value"] == '\\frac':
-                fracDict = []
-                xStartBound = box[1]["x"]
-                xEndBound = box[1]["x"] + box[1]["w"]
-                for bb in boxes:
-                    if bb == {0}:
-                        continue
-                    # add the bb that above or below the fracture line.
-                    if (bb[1]["x"] > xStartBound and bb[1]["x"] + bb[1]["w"] < xEndBound) or bb[1]["x"] == xStartBound:
-                        fracDict.append(bb)
-                    # if not the first bb - break from loop.
-                    elif bb[1]["x"] > xStartBound:
-                        break
-                resultString = resultString + self._FractureHandling(fracDict, box[1]["y"])
-                # remove all the element we analyzed.
-                for element in fracDict:
-                    boxes.remove(element)
-                boxes.insert(0, {0})
-            elif box[1]["value"] == '\int_':
-                integralDict = []
-                xStartBound = box[1]["x"]
-                integralDict.append(box)
-                for bb in boxes:
-                    if bb == {0}:
-                        continue
-                    # add the bb that part of the integral.
-                    if bb[1]["x"] > xStartBound and bb[1]["value"] != "d":
-                        integralDict.append(bb)
-                    # content of integral end with "dx".
-                    elif bb[1]["value"] == "d":
-                        integralDict.append(bb)
-                        if boxes.__getitem__(boxes.index(bb)+1)[1]["value"] == "x":
-                            integralDict.append(boxes.__getitem__(boxes.index(bb)+1))
-                            break
-                resultString = resultString + self._IntegralHandling(integralDict, box[1]["y"], box[1]["h"])
-                for element in integralDict:
-                    boxes.remove(element)
+        self.mapToFanc = {"frac": self._FractureHandling, "int": self._IntegralHandling}
+        i = 0
+        while i < len(boxes):
+            if boxes[i][1]["value"].split(" ")[0] in self.spacialList:
+                lastXcoordinate = int(boxes[i][1]["value"].split(" ")[1])
+                string, end = self.mapToFanc[boxes[i][1]["value"].split(" ")[0]](boxes, i+1, lastXcoordinate)
+                resultString = resultString + string
+                i = end
             else:
-                resultString = resultString + box[1]["value"]
+                if i > 0:
+                    if boxes[i][1]["y"] + 0.6 * boxes[i][1]["h"] < boxes[i-1][1]["y"] + 0.6 * boxes[i-1][1]["h"]:
+                        resultString = resultString + "^{"
+                        j = i
+                        while j != len(boxes):
+                            if boxes[j][1]["value"].split(" ")[0] in self.spacialList:
+                                lastXcoordinate = int(boxes[j][1]["value"].split(" ")[1])
+                                string, end = self.mapToFanc[boxes[j][1]["value"].split(" ")[0]](boxes, j + 1,
+                                                                                                 lastXcoordinate)
+                                resultString = resultString + string
+                                j = end
+                            if boxes[j][1]["y"] + 0.6 * boxes[j][1]["h"] < boxes[i - 1][1]["y"] + 0.6 * boxes[i - 1][1][
+                                "h"]:
+                                resultString = resultString + boxes[j][1]["value"]
+                            j += 1
+                        i += j
+                        resultString = resultString + "}"
+                        continue
+                resultString = resultString + boxes[i][1]["value"]
+                i += 1
         return resultString
 
-    def _FractureHandling (self, boxes, yCoordinate):
+    def _FractureHandling (self, boxes, start, lastXcoordinate):
         """
         handle the case of fracture, finds the numerator and the denominator and returns a string representing the fraction
         :param boxes: all the information about the boundingBoxes in the fracture.
         :type boxes: Dictionary
-        :param yCoordinate: the value of y coordinate to distinguish between the numerator and the denominator.
-        :type yCoordinate: int
+        :param start: the index of the first BB.
+        :type start: int
+        :param lastXcoordinate: the index of the last BB.
+        :type lastXcoordinate: int
         """
         numeratorDict = []
         denominatorDict = []
-        for box in boxes:
-            if box[1]["value"] == '\\frac':
+        i = start
+        while boxes[i][1]["x"] <= lastXcoordinate:
+            if boxes[i][1]["value"] == '\\frac':
+                i += 1
                 continue
-            if box[1]["y"] < yCoordinate:
-                numeratorDict.append(box)
+            if boxes[i][1]["y"] < boxes[start][1]["y"]:
+                numeratorDict.append(boxes[i])
             else:
-                denominatorDict.append(box)
-        numerator = self.StructureAnalysis(numeratorDict)
-        denominator = self.StructureAnalysis(denominatorDict)
-        return "\\frac{" + numerator + "}{" + denominator + "}"
+                denominatorDict.append(boxes[i])
+            i += 1
+        numerator = self.RecAnalysis(numeratorDict)
+        denominator = self.RecAnalysis(denominatorDict)
+        return "\\frac{" + numerator + "}{" + denominator + "}" , i
 
-    def _IntegralHandling (self, boxes, yCoordinate, height):
+    def _IntegralHandling (self, boxes, start, lastXcoordinate):
         """
         handle the case of integral, finds the boundaries and returns a string representing the integral content
         :param boxes: all the information about the boundingBoxes in the integral.
         :type boxes: Dictionary
-        :param yCoordinate: the value of y coordinate to distinguish between the numerator and the denominator.
-        :type yCoordinate: int
-        :param height: the height of the integral sigh.
-        :type height: int
+        :param start: the index of the first BB.
+        :type start: int
+        :param lastXcoordinate: the index of the last BB.
+        :type lastXcoordinate: int
         """
         upperDict = []
         lowerDict = []
         contentDict = []
-        for box in boxes:
-            if box[1]["value"] == '\int_':
+        i = start
+        while boxes[i][1]["x"] < lastXcoordinate:
+            if boxes[i][1]["value"] == '\int_':
+                i += 1
                 continue
-            if box[1]["y"] < yCoordinate:
-                upperDict.append(box)
-            elif box[1]["y"] > yCoordinate + height - 30:
-                lowerDict.append(box)
+            if boxes[i][1]["y"] < boxes[start][1]["y"]:
+                upperDict.append(boxes[i])
+            elif boxes[i][1]["y"] > boxes[start][1]["y"] + boxes[start][1]["h"] - 30:
+                lowerDict.append(boxes[i])
             else:
-                i = boxes.index(box)
-                size = len(boxes)
-                for box in range(i, size):
-                    contentDict.append(boxes.__getitem__(box))
+                while boxes[i][1]["x"] < lastXcoordinate:
+                    contentDict.append(boxes[i])
+                    i += 1
                 break
-        lower = self.StructureAnalysis(lowerDict)
-        upper = self.StructureAnalysis(upperDict)
-        content = self.StructureAnalysis(contentDict)
+            i += 1
+        if boxes[i][1]["x"] == lastXcoordinate:
+            contentDict.append(boxes[i])
+        lower = self.RecAnalysis(lowerDict)
+        upper = self.RecAnalysis(upperDict)
+        content = self.RecAnalysis(contentDict)
 
-        return "\int_{" + lower + "}^{" + upper + "} " + content
+        return "\int_{" + lower + "}^{" + upper + "} " + content , i+1
