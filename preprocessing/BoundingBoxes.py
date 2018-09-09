@@ -35,6 +35,7 @@ class BoundingBoxes(object):
       # Find all the contours using openCV function.
       im3, contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
       boundingBoxes = {}
+      directory = ""
       #ToDo - check if the boundongBoxes are atomic.
       # for each boundingBoxes - save as image.
       for i in range(1, len(contours)):

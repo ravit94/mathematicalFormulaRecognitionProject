@@ -48,7 +48,21 @@ class OtsuMethod(object):
         # Save the binary image in the same directory.
         cv.imwrite(binaryImagePath, binaryImage)
         image = cv.imread(binaryImagePath)
-        for i in range(uppers.__len__()):
+        i=0
+        while i != len(uppers):
+            if lowers[i] - uppers[i] < 10:
+                lowers.remove(lowers[i])
+                uppers.remove(uppers[i])
+                continue
+            i += 1
+        i = 0
+        while i < len(uppers):
+            flag = False
+            if i < len(uppers) -1:
+                if uppers[i+1] - lowers[i] < 10:
+                    lowers.remove(lowers[i])
+                    uppers.remove(uppers[i+1])
+                    flag = True
             file_path = "C:/rows/" + str(i) + '.png'
             directory = os.path.dirname(file_path)
             try:
@@ -58,8 +72,12 @@ class OtsuMethod(object):
             y = uppers[i] - 20
             x = 0
             h = (lowers[i] - uppers[i]) + 40
-            letter = image[y:y + h, x:x + W]
-            cv.imwrite(file_path, letter)
+            if flag:
+                y = y - 50
+                h = h + 40
+            row = image[y:y + h, x:x + W]
+            cv.imwrite(file_path, row)
+            i += 1
         # Return the path to the directory of binary images.
         return directory
 

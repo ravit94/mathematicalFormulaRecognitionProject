@@ -6,7 +6,8 @@ class StructureAnalysis(object):
 
     def __init__(self):
         super(StructureAnalysis, self).__init__()
-        self.spacialList = ["frac", "int"]
+        self.spacialList = ["frac", "int", "sqrt"]
+        self.exception = ["=", "+"]
 
     def Preprocessing(self, boxes):
         """
@@ -15,7 +16,6 @@ class StructureAnalysis(object):
         :type boxes: Dictionary
         """
         i = 0
-
         while i != len(boxes):
             if boxes[i][1]["value"] == '\\frac':
                 lastXcoordinate = 0
@@ -37,6 +37,9 @@ class StructureAnalysis(object):
                     # if not the first bb - break from loop.
                     elif boxes[j][1]["x"] > xStartBound:
                         break
+                if lastXcoordinate == boxes[i][1]["x"]:
+                        boxes[i][1]["value"] = "="
+                        continue
                 boxes.insert(i, (xStartBound, {"x": data["xCoordinate"], "y":  data["yCoordinate"],
                                                "h":  data["minY"] - data["maxY"],
                                                "w": boxes[i][1]["w"], "value": "frac {}".format(lastXcoordinate)}))
@@ -56,8 +59,23 @@ class StructureAnalysis(object):
                                 "w": boxes[j + 1][1]["w"] + boxes[j + 1][1]["x"] - boxes[i][1]["x"],
                                 "value": "int {}".format(lastXcoordinate)}))
                 i += 1
+            if boxes[i][1]["value"] == '\\sqrt':
+                lastXcoordinate = 0
+                xStartBound = boxes[i][1]["x"]
+                xEndBound = boxes[i][1]["x"] + boxes[i][1]["w"]
+                for j in range(i, len(boxes)):
+                    # add the bb that inside the sqrt.
+                    if (boxes[j][1]["x"] > xStartBound and boxes[j][1]["x"] + boxes[j][1]["w"] < xEndBound) or \
+                            boxes[j][1]["x"] == xStartBound:
+                        lastXcoordinate = boxes[j][1]["x"]
+                    # if not the first bb - break from loop.
+                    elif boxes[j][1]["x"] > xStartBound:
+                        break
+                boxes.insert(i, (xStartBound, {"x": boxes[i][1]["x"], "y": boxes[i][1]["y"],
+                                               "h": boxes[i][1]["h"],
+                                               "w": boxes[i][1]["w"], "value": "sqrt {}".format(lastXcoordinate)}))
+                i += 1
             i += 1
-        i = 1
         return boxes
 
     def _NextIndex(self, box, boxes):
@@ -91,7 +109,7 @@ class StructureAnalysis(object):
         :type boxes: Dictionary
         """
         resultString = ""
-        self.mapToFanc = {"frac": self._FractureHandling, "int": self._IntegralHandling}
+        self.mapToFanc = {"frac": self._FractureHandling, "int": self._IntegralHandling, "sqrt": self._SqrtHandling}
         i = 0
         while i < len(boxes):
             if boxes[i][1]["value"].split(" ")[0] in self.spacialList:
@@ -100,8 +118,10 @@ class StructureAnalysis(object):
                 resultString = resultString + string
                 i = end
             else:
+                # recognize exponent relation
                 if i > 0:
-                    if boxes[i][1]["y"] + 0.6 * boxes[i][1]["h"] < boxes[i-1][1]["y"] + 0.6 * boxes[i-1][1]["h"]:
+                    if boxes[i][1]["y"] + 0.6 * boxes[i][1]["h"] < boxes[i-1][1]["y"] + 0.6 * boxes[i-1][1]["h"] and  \
+                            boxes[i][1]["value"] not in self.exception and boxes[i-1][1]["value"] not in self.exception:
                         resultString = resultString + "^{"
                         j = i
                         while j != len(boxes):
@@ -111,6 +131,7 @@ class StructureAnalysis(object):
                                                                                                  lastXcoordinate)
                                 resultString = resultString + string
                                 j = end
+                                continue
                             if boxes[j][1]["y"] + 0.6 * boxes[j][1]["h"] < boxes[i - 1][1]["y"] + 0.6 * boxes[i - 1][1][
                                 "h"]:
                                 resultString = resultString + boxes[j][1]["value"]
@@ -181,5 +202,30 @@ class StructureAnalysis(object):
         lower = self.RecAnalysis(lowerDict)
         upper = self.RecAnalysis(upperDict)
         content = self.RecAnalysis(contentDict)
-
         return "\int_{" + lower + "}^{" + upper + "} " + content , i+1
+
+    def _SqrtHandling (self, boxes, start, lastXcoordinate):
+        """
+        handle the case of Sqrt, finds the boundaries and returns a string representing the Sqrt content
+        :param boxes: all the information about the boundingBoxes in the integral.
+        :type boxes: Dictionary
+        :param start: the index of the first BB.
+        :type start: int
+        :param lastXcoordinate: the index of the last BB.
+        :type lastXcoordinate: int
+        """
+        i = start
+        contentDict = []
+
+        while boxes[i][1]["x"] < lastXcoordinate:
+            if boxes[i][1]["value"] == '\\sqrt':
+                i += 1
+                continue
+            while boxes[i][1]["x"] < lastXcoordinate:
+                    contentDict.append(boxes[i])
+                    i += 1
+            break
+        if boxes[i][1]["x"] == lastXcoordinate:
+            contentDict.append(boxes[i])
+        content = self.RecAnalysis(contentDict)
+        return "\sqrt{}".format(content), i+1
