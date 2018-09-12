@@ -56,6 +56,8 @@ class BoundingBoxes(object):
             # all the information about this boundingBox
          cv2.imwrite(file_path, letter)
          value = self.symbolRecognition.Recognize(file_path)
+         if value == '\sum':
+            x -= 5
          boundingBoxes.update({x: {"x": x, "y": y, "h": h, "w": w, "value": value}})
          if value in self.skipOnceList:
             self.skip = 1

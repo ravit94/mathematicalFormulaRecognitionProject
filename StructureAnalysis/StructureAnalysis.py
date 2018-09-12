@@ -6,7 +6,7 @@ class StructureAnalysis(object):
 
     def __init__(self):
         super(StructureAnalysis, self).__init__()
-        self.spacialList = ["frac", "int", "sqrt"]
+        self.spacialList = ["frac", "int", "sqrt", "leftPar", "sum"]
         self.exception = ["=", "+"]
 
     def Preprocessing(self, boxes):
@@ -75,6 +75,34 @@ class StructureAnalysis(object):
                                                "h": boxes[i][1]["h"],
                                                "w": boxes[i][1]["w"], "value": "sqrt {}".format(lastXcoordinate)}))
                 i += 1
+            if boxes[i][1]["value"] == '\left ( ':
+                lastXcoordinate = 0
+                xStartBound = boxes[i][1]["x"]
+                for j in range(i, len(boxes)):
+                    # add the bb that inside the Parenthesis.
+                    if boxes[j][1]["value"] == '\\right )':
+                        lastXcoordinate = boxes[j][1]["x"]
+                        break
+                boxes.insert(i, (xStartBound, {"x": boxes[i][1]["x"], "y": boxes[i][1]["y"],
+                                               "h": boxes[i][1]["h"],
+                                               "w": boxes[j][1]["x"] - xStartBound,
+                                               "value": "leftPar {}".format(lastXcoordinate)}))
+                i += 1
+            if boxes[i][1]["value"] == '\sum':
+                lastXcoordinate = 0
+                xStartBound = boxes[i][1]["x"]
+                xEndBound = boxes[i][1]["x"] + boxes[i][1]["w"] +20
+                for j in range(i, len(boxes)):
+                    # add the bb that above or below the fracture line.
+                    if (boxes[j][1]["x"] >= xStartBound and boxes[j][1]["x"] + boxes[j][1]["w"] < xEndBound) or boxes[j][1]["x"] == xStartBound:
+                        lastXcoordinate = boxes[j][1]["x"]
+                    # if not the first bb - break from loop.
+                    elif boxes[j][1]["x"] > xEndBound:
+                        break
+                boxes.insert(i, (xStartBound, {"x": boxes[i][1]["x"], "y": boxes[i][1]["y"],
+                                               "h": boxes[i][1]["h"], "w": boxes[j][1]["x"] - xStartBound,
+                                               "value": "sum {}".format(lastXcoordinate)}))
+                i += 1
             i += 1
         return boxes
 
@@ -108,39 +136,46 @@ class StructureAnalysis(object):
         :param boxes: all the information about the boundingBoxes in the current row.
         :type boxes: Dictionary
         """
+        flag = False
         resultString = ""
-        self.mapToFanc = {"frac": self._FractureHandling, "int": self._IntegralHandling, "sqrt": self._SqrtHandling}
+        self.mapToFanc = {"frac": self._FractureHandling, "int": self._IntegralHandling, "sqrt": self._SqrtHandling,
+                          "leftPar": self._ParenthesisHandling, "sum": self._SumHandling}
         i = 0
         while i < len(boxes):
             if boxes[i][1]["value"].split(" ")[0] in self.spacialList:
                 lastXcoordinate = int(boxes[i][1]["value"].split(" ")[1])
-                string, end = self.mapToFanc[boxes[i][1]["value"].split(" ")[0]](boxes, i+1, lastXcoordinate)
+                string, end, flag = self.mapToFanc[boxes[i][1]["value"].split(" ")[0]](boxes, i+1, lastXcoordinate)
                 resultString = resultString + string
                 i = end
             else:
                 # recognize exponent relation
-                if i > 0:
-                    if boxes[i][1]["y"] + 0.6 * boxes[i][1]["h"] < boxes[i-1][1]["y"] + 0.6 * boxes[i-1][1]["h"] and \
-                            abs((boxes[i][1]["y"] + boxes[i][1]["h"]) - (boxes[i-1][1]["y"] + boxes[i-1][1]["h"])) > 10 and \
-                            boxes[i][1]["value"] not in self.exception and boxes[i-1][1]["value"] not in self.exception:
+                if i > 0 and not flag:
+                    ref = boxes[i-1][1]
+                    if ref["value"] == '\\right )':
+                        ref["y"] -= 5
+                    if boxes[i][1]["y"] + 0.6 * boxes[i][1]["h"] < ref["y"] + 0.6 * ref["h"] and \
+                            abs((boxes[i][1]["y"] + boxes[i][1]["h"]) - (ref["y"] + ref["h"])) > 10 and \
+                            boxes[i][1]["value"] not in self.exception and ref["value"] not in self.exception:
                         resultString = resultString + "^{"
                         j = i
                         while j != len(boxes):
                             if boxes[j][1]["value"].split(" ")[0] in self.spacialList:
                                 lastXcoordinate = int(boxes[j][1]["value"].split(" ")[1])
-                                string, end = self.mapToFanc[boxes[j][1]["value"].split(" ")[0]](boxes, j + 1,
+                                string, end , flag = self.mapToFanc[boxes[j][1]["value"].split(" ")[0]](boxes, j + 1,
                                                                                                  lastXcoordinate)
                                 resultString = resultString + string
                                 j = end
                                 continue
-                            if boxes[j][1]["y"] + 0.6 * boxes[j][1]["h"] < boxes[i - 1][1]["y"] + 0.6 * boxes[i - 1][1][
-                                "h"]:
+                            if boxes[j][1]["y"] + 0.6 * boxes[j][1]["h"] < ref["y"] + 0.6 * ref["h"]:
                                 resultString = resultString + boxes[j][1]["value"]
+                            else:
+                                break
                             j += 1
-                        i += j
+                        i = j
                         resultString = resultString + "}"
                         continue
                 resultString = resultString + boxes[i][1]["value"]
+                flag = False
                 i += 1
         return resultString
 
@@ -168,7 +203,7 @@ class StructureAnalysis(object):
             i += 1
         numerator = self.RecAnalysis(numeratorDict)
         denominator = self.RecAnalysis(denominatorDict)
-        return "\\frac{" + numerator + "}{" + denominator + "}" , i
+        return "\\frac{" + numerator + "}{" + denominator + "}" , i, False
 
     def _IntegralHandling (self, boxes, start, lastXcoordinate):
         """
@@ -203,30 +238,73 @@ class StructureAnalysis(object):
         lower = self.RecAnalysis(lowerDict)
         upper = self.RecAnalysis(upperDict)
         content = self.RecAnalysis(contentDict)
-        return "\int_{" + lower + "}^{" + upper + "} " + content , i+1
+        return "\int_{" + lower + "}^{" + upper + "} " + content , i+1, False
 
     def _SqrtHandling (self, boxes, start, lastXcoordinate):
         """
-        handle the case of Sqrt, finds the boundaries and returns a string representing the Sqrt content
-        :param boxes: all the information about the boundingBoxes in the integral.
+        handle the case of Sqrt,  finds the boundaries and returns a string representing the sqrt content
+        :param boxes: all the information about the boundingBoxes in the Sqrt.
         :type boxes: Dictionary
         :param start: the index of the first BB.
         :type start: int
         :param lastXcoordinate: the index of the last BB.
         :type lastXcoordinate: int
         """
-        i = start
+        i = start + 1
         contentDict = []
-
         while boxes[i][1]["x"] < lastXcoordinate:
-            if boxes[i][1]["value"] == '\\sqrt':
-                i += 1
-                continue
-            while boxes[i][1]["x"] < lastXcoordinate:
-                    contentDict.append(boxes[i])
-                    i += 1
-            break
+            contentDict.append(boxes[i])
+            i += 1
         if boxes[i][1]["x"] == lastXcoordinate:
             contentDict.append(boxes[i])
         content = self.RecAnalysis(contentDict)
-        return "\sqrt{" + content + "}", i+1
+        return "\sqrt{" + content + "}", i+1, False
+
+    def _ParenthesisHandling(self, boxes, start, lastXcoordinate):
+        """
+        handle the case of Parenthesis, finds the boundaries and returns a string representing the Parenthesis content
+        :param boxes: all the information about the boundingBoxes in the Parenthesis.
+        :type boxes: Dictionary
+        :param start: the index of the first BB.
+        :type start: int
+        :param lastXcoordinate: the index of the last BB.
+        :type lastXcoordinate: int
+        """
+        i = start +1
+        contentDict = []
+
+        while boxes[i][1]["x"] < lastXcoordinate:
+            contentDict.append(boxes[i])
+            i += 1
+        content = self.RecAnalysis(contentDict)
+        return "(" + content + ")", i+1, False
+
+    def _SumHandling(self, boxes, start, lastXcoordinate):
+        """
+        handle the case of sum, finds the boundaries and returns a string representing the sum
+        :param boxes: all the information about the boundingBoxes in the fracture.
+        :type boxes: Dictionary
+        :param start: the index of the first BB.
+        :type start: int
+        :param lastXcoordinate: the index of the last BB.
+        :type lastXcoordinate: int
+        """
+        upperDict = []
+        lowerDict = []
+        i = start
+        while boxes[i][1]["x"] <= lastXcoordinate:
+            if boxes[i][1]["value"] == '\sum':
+                i += 1
+                continue
+            if boxes[i][1]["y"] < boxes[start][1]["y"]:
+                upperDict.append(boxes[i])
+            elif boxes[i][1]["y"] > boxes[start][1]["y"] + boxes[start][1]["h"]:
+                lowerDict.append(boxes[i])
+            if boxes[i][1]["x"] == lastXcoordinate:
+                break
+            i += 1
+        lower = self.RecAnalysis(lowerDict)
+        upper = self.RecAnalysis(upperDict)
+        if lower.__contains__("^{-}"):
+            lower = lower.replace("^{-}", "=")
+        return "\sum_{" + lower + "}^{" + upper + "} ", i + 1 , True

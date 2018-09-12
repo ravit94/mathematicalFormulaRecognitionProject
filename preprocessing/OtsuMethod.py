@@ -63,6 +63,11 @@ class OtsuMethod(object):
                     lowers.remove(lowers[i])
                     uppers.remove(uppers[i+1])
                     flag = True
+                elif uppers[i + 1] - lowers[i] < 25:
+                    lowers.remove(lowers[i])
+                    uppers.remove(uppers[i + 1])
+                    i -= 1
+                    flag = True
             file_path = "C:/rows/" + str(i) + '.png'
             directory = os.path.dirname(file_path)
             try:
@@ -73,6 +78,7 @@ class OtsuMethod(object):
             x = 0
             h = (lowers[i] - uppers[i]) + 40
             if flag:
+                flag = False
                 y = y - 50
                 h = h + 50
             row = image[y:y + h, x:x + W]
