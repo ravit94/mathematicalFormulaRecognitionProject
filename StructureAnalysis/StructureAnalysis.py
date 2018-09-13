@@ -24,7 +24,7 @@ class StructureAnalysis(object):
                 xEndBound = boxes[i][1]["x"] + boxes[i][1]["w"]
                 for j in range(i, len(boxes)):
                     # add the bb that above or below the fracture line.
-                    if (boxes[j][1]["x"] > xStartBound and boxes[j][1]["x"] + boxes[j][1]["w"] < xEndBound) or boxes[j][1]["x"] == xStartBound:
+                    if (boxes[j][1]["x"] > xStartBound and boxes[j][1]["x"] + boxes[j][1]["w"] <= xEndBound) or boxes[j][1]["x"] == xStartBound:
                         if boxes[j][1]["y"] < boxes[i][1]["y"] and boxes[j][1]["y"] < data["maxY"]:
                             if not data["isFirst"]:
                                 data["xCoordinate"] = boxes[j][1]["x"]
@@ -166,7 +166,8 @@ class StructureAnalysis(object):
                                 resultString = resultString + string
                                 j = end
                                 continue
-                            if boxes[j][1]["y"] + 0.6 * boxes[j][1]["h"] < ref["y"] + 0.6 * ref["h"]:
+                            if (boxes[j][1]["y"] + 0.6 * boxes[j][1]["h"] < ref["y"] + 0.6 * ref["h"]) and \
+                                    boxes[j][1]["value"] not in self.exception:
                                 resultString = resultString + boxes[j][1]["value"]
                             else:
                                 break
@@ -201,6 +202,8 @@ class StructureAnalysis(object):
             else:
                 denominatorDict.append(boxes[i])
             i += 1
+            if i == len(boxes):
+                break
         numerator = self.RecAnalysis(numeratorDict)
         denominator = self.RecAnalysis(denominatorDict)
         return "\\frac{" + numerator + "}{" + denominator + "}" , i, False

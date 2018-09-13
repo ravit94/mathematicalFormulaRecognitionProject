@@ -58,6 +58,12 @@ class BoundingBoxes(object):
          value = self.symbolRecognition.Recognize(file_path)
          if value == '\sum':
             x -= 5
+         if boundingBoxes.__contains__(x):
+            if (value == '\\frac') or (value == "-"):
+               boundingBoxes.get(x)["value"] = "="
+               continue
+            x += 0.5
+
          boundingBoxes.update({x: {"x": x, "y": y, "h": h, "w": w, "value": value}})
          if value in self.skipOnceList:
             self.skip = 1
