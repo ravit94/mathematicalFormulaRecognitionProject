@@ -1,4 +1,6 @@
 
+
+
 class ConvertStringToLatexFormat(object):
    """
    BoundingBoxes used to segment binary image into boxes.
@@ -50,3 +52,18 @@ class ConvertStringToLatexFormat(object):
           if latexFormat.__contains__(symbol):
             return latexFormat[symbol]
       return symbol
+
+   def CreateLatexFile(self, resString):
+      """
+      This function receive the symbol that recognized by Tesseract
+      or by correlation coefficient and return the symbol in latex format.
+      :param symbol: recognized by Tesseract or by correlation coefficient
+      :type symbol: string
+      """
+      latexFormat = "latex" + resString
+
+      return latexFormat
+
+res = " x+1"
+latex = ConvertStringToLatexFormat
+print (latex.CreateLatexFile(latex, res))
