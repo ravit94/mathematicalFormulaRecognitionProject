@@ -1,6 +1,4 @@
 
-
-
 class ConvertStringToLatexFormat(object):
    """
    BoundingBoxes used to segment binary image into boxes.
