@@ -53,17 +53,23 @@ class ConvertStringToLatexFormat(object):
             return latexFormat[symbol]
       return symbol
 
-   def CreateLatexFile(self, resString):
+   def CreateLatexFile(self, resultString):
       """
-      This function receive the symbol that recognized by Tesseract
-      or by correlation coefficient and return the symbol in latex format.
-      :param symbol: recognized by Tesseract or by correlation coefficient
-      :type symbol: string
+      This function receive the result string from the recognition in latex format
+      and create editable latex file included the option to displayed as pdf file also.
+      :param resultString: received by the process of structure analysis.
+      :type resultString: string
       """
-      latexFormat = "latex" + resString
+      latexFormat = "\documentclass[12pt]{article}" + "\n\\usepackage{amsmath}"\
+                    +"\n\\usepackage{graphicx}"+"\n\\usepackage{hyperref}" \
+                    +"\n\\usepackage[latin1]{inputenc}"+"\n" \
+                    +"\n\\title{Editable LaTeX file}"+"\n\\date{14/09/2018}" \
+                    +"\n\\begin{document}"+"\n\\maketitle" \
+                    +"\nYou convert the image example.pnf to \LaTeX{} and now you can edit the file!" \
+                    +"\n\\begin{equation}"+"\n\n" + resultString +"\n\n\\end{equation}"+"\n\n\\end{document}"
 
       return latexFormat
 
-res = " x+1"
+res = "f(x)=\\frac{x+1}{\sqrt{x^2}+7}}+2"
 latex = ConvertStringToLatexFormat
-print (latex.CreateLatexFile(latex, res))
+print(latex.CreateLatexFile(latex, res))
