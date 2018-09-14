@@ -156,6 +156,13 @@ class StructureAnalysis(object):
                     if boxes[i][1]["y"] + 0.6 * boxes[i][1]["h"] < ref["y"] + 0.6 * ref["h"] and \
                             abs((boxes[i][1]["y"] + boxes[i][1]["h"]) - (ref["y"] + ref["h"])) > 10 and \
                             boxes[i][1]["value"] not in self.exception and ref["value"] not in self.exception:
+                        if boxes[i][1]["value"] == "-":
+                            if i < len(boxes) - 1:
+                                if not ( boxes[i+1][1]["y"] + 0.6 * boxes[i+1][1]["h"] < ref["y"] + 0.6 * ref["h"] and \
+                            abs((boxes[i+1][1]["y"] + boxes[i+1][1]["h"]) - (ref["y"] + ref["h"])) > 10 and \
+                            boxes[i][1]["value"] not in self.exception and ref["value"] not in self.exception):
+                                    flag = True
+                                    continue
                         resultString = resultString + "^{"
                         j = i
                         while j != len(boxes):
