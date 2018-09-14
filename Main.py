@@ -6,7 +6,7 @@ from StructureAnalysis.StructureAnalysis import StructureAnalysis
 import shutil
 import os
 
-imagePath = "example.PNG"
+imagePath = "bi.PNG"
 otsu = OtsuMethod()
 boundingBoxes = BoundingBoxes()
 symbolRecognition = SymbolRecognition()

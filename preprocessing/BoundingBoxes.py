@@ -59,9 +59,10 @@ class BoundingBoxes(object):
          if value == '\sum':
             x -= 5
          if boundingBoxes.__contains__(x):
-            if (value == '\\frac') or (value == "-"):
-               boundingBoxes.get(x)["value"] = "="
-               continue
+            if value == boundingBoxes.get(x)["value"]:
+               if (value == '\\frac') or (value == "-"):
+                  boundingBoxes.get(x)["value"] = "="
+                  continue
             x += 0.5
 
          boundingBoxes.update({x: {"x": x, "y": y, "h": h, "w": w, "value": value}})

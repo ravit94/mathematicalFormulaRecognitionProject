@@ -38,7 +38,7 @@ class StructureAnalysis(object):
                     elif boxes[j][1]["x"] > xStartBound:
                         break
                 if lastXcoordinate == boxes[i][1]["x"]:
-                        boxes[i][1]["value"] = "="
+                        boxes[i][1]["value"] = "-"
                         continue
                 boxes.insert(i, (xStartBound, {"x": data["xCoordinate"], "y":  data["yCoordinate"],
                                                "h":  data["minY"] - data["maxY"],
@@ -273,12 +273,32 @@ class StructureAnalysis(object):
         :param lastXcoordinate: the index of the last BB.
         :type lastXcoordinate: int
         """
-        i = start +1
+        i = start + 1
         contentDict = []
-
+        upper = []
+        lower = []
         while boxes[i][1]["x"] < lastXcoordinate:
             contentDict.append(boxes[i])
             i += 1
+        j = 1
+        # try to recognize binom relation
+        if len(contentDict) > 1:
+            if (contentDict[j - 1][1]["x"] - contentDict[j][1]["x"]) < 4 and \
+                    (contentDict[j - 1][1]["y"] + contentDict[j - 1][1]["h"]) < contentDict[j][1]["y"]:
+                upper.append(contentDict[j - 1])
+                lower.append(contentDict[j])
+                j += 1
+                while j < len(contentDict):
+                    if contentDict[j][1]["y"] > (upper[0][1]["y"] + upper[0][1]["h"]):
+                        lower.append(contentDict[j])
+                    else:
+                        upper.append(contentDict[j])
+                    j += 1
+                up = self.RecAnalysis(upper)
+                low = self.RecAnalysis(lower)
+                content = "\\binom{" + up + "}{" + low + "}"
+                return content, i + 1, True
+
         content = self.RecAnalysis(contentDict)
         return "(" + content + ")", i+1, False
 
