@@ -14,14 +14,39 @@ class ConvertStringToLatexFormat(object):
       :param symbol: recognized by Tesseract or by correlation coefficient
       :type symbol: string
       """
-      latexFormat = {'alpha': '\\alpha','beta':'\\beta','bigger':'>','dot':'\cdot','epsilon':'\epsilon',
-       'phi':'\phi','frac':'\\frac','gamma':'\gamma','infinity':'\infty','integral':'\int_','lambda':'\lambda',
-       'leftArrow':'\leftarrow','leftPar':'\left ( ','mult':'X','omega':'\omega','pi':'\pi','rightArrow':'\\rightarrow',
-       'rightPar':'\\right )','sig':'\sum','smaller':'<','prod':'\prod','sqrt':'\sqrt','Theta':'\Theta',
-       'Unequal':'\\neq', 'Union': '\cup', None:None}
+      latexFormat = {'alpha'        : '\\alpha',
+                     'beta'         : '\\beta',
+                     'bigger'       : '>',
+                     'dot'          : '\cdot',
+                     'epsilon'      : '\epsilon',
+                     'phi'          : '\phi',
+                     'frac'         : '\\frac',
+                     'gamma'        : '\gamma',
+                     'infinity'     : '\infty',
+                     'integral'     : '\int_',
+                     'lambda'       : '\lambda',
+                     'leftArrow'    : '\leftarrow',
+                     'leftPar'      : '\left ( ',
+                     'mult'         : 'X',
+                     'omega'        : '\omega',
+                     'pi'           : '\pi',
+                     'rightArrow'   : '\\rightarrow',
+                     'rightPar'     : '\\right )',
+                     'sig'          : '\sum',
+                     'smaller'      : '<',
+                     'prod'         : '\prod',
+                     'sqrt'         : '\sqrt',
+                     'Theta'        : '\Theta',
+                     'Unequal'      : '\\neq',
+                     'Union'        : '\cup'}
 
-      if latexFormat.__contains__(symbol):
-        return latexFormat[symbol]
-
-      else:
-        return symbol
+      if symbol == None:
+          return None
+      if symbol.__contains__("."):
+          symbol = symbol.split(".")[0]
+          if latexFormat.__contains__(symbol):
+            return latexFormat[symbol]
+          symbol = symbol[:-1]
+          if latexFormat.__contains__(symbol):
+            return latexFormat[symbol]
+      return symbol
