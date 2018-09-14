@@ -63,7 +63,7 @@ class ConvertStringToLatexFormat(object):
                     +"\n\\usepackage[latin1]{inputenc}"+"\n" \
                     +"\n\\title{Editable LaTeX file}"+"\n\\date{14/09/2018}" \
                     +"\n\\begin{document}"+"\n\\maketitle" \
-                    +"\nYou convert the image example.pnf to \LaTeX{} and now you can edit the file!" \
+                    +"\nYou convert the image example.PNG to \LaTeX{} and now you can edit the file!" \
                     +"\n\\begin{equation}"+"\n\n" + resultString +"\n\n\\end{equation}"+"\n\n\\end{document}"
 
       return latexFormat
