@@ -51,21 +51,20 @@ class Correlation(object):
         """
         # Resize it.
         size = 500
-        # we save the upper as dabble.
-        if symbol.isupper():
-            symbol = symbol + symbol
-        path = "Digits&Letters\\" + symbol + ".png"
-        # check if exist.
-        if not os.path.isfile(path):
-            return False
-        # open the images.
         imageA = Image.open(bb)
-        imageB = Image.open(path)
-        diff = self.CompareImages(imageA, imageB)
-        # check if the two given images are equal.
-        if diff > 20:
+        path = "Digits&Letters\\" + symbol
+        if not os.path.isdir(path):
             return False
-        return True
+        templates = os.listdir(path)
+        for template in templates:
+            if not os.path.isfile(path + "\\" + template):
+                return False
+            imageB = Image.open(path + "\\" + template)
+            diff = self.CompareImages(imageA, imageB)
+            # find the smallest error.
+            if diff < 18:
+                return True
+        return False
 
     def CompareImages(self, imageA, imageB):
         """

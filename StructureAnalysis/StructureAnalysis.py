@@ -38,8 +38,8 @@ class StructureAnalysis(object):
                     elif boxes[j][1]["x"] > xStartBound:
                         break
                 if lastXcoordinate == boxes[i][1]["x"]:
-                        boxes[i][1]["value"] = "-"
-                        continue
+                    boxes[i][1]["value"] = "-"
+                    continue
                 boxes.insert(i, (xStartBound, {"x": data["xCoordinate"], "y":  data["yCoordinate"],
                                                "h":  data["minY"] - data["maxY"],
                                                "w": boxes[i][1]["w"], "value": "frac {}".format(lastXcoordinate)}))
@@ -80,7 +80,7 @@ class StructureAnalysis(object):
                 xStartBound = boxes[i][1]["x"]
                 for j in range(i, len(boxes)):
                     # add the bb that inside the Parenthesis.
-                    if boxes[j][1]["value"] == '\\right )':
+                    if boxes[j][1]["value"] == '\\right )' and abs(boxes[j][1]["y"] - boxes[i][1]["y"]) < 2 :
                         lastXcoordinate = boxes[j][1]["x"]
                         break
                 boxes.insert(i, (xStartBound, {"x": boxes[i][1]["x"], "y": boxes[i][1]["y"],
@@ -103,6 +103,10 @@ class StructureAnalysis(object):
                                                "h": boxes[i][1]["h"], "w": boxes[j][1]["x"] - xStartBound,
                                                "value": "sum {}".format(lastXcoordinate)}))
                 i += 1
+            if boxes[i][1]["value"] == 'l' and i < (len(boxes) - 1):
+                if boxes[i + 1][1]["value"] == '\\cdot':
+                    boxes[i][1]["value"] = "i"
+                    boxes.remove(boxes[i + 1])
             i += 1
         return boxes
 
@@ -182,6 +186,10 @@ class StructureAnalysis(object):
                         i = j
                         resultString = resultString + "}"
                         continue
+                if i < (len(boxes) - 1):
+                    if abs(boxes[i + 1][1]["x"] - boxes[i][1]["x"]) == 0.5:
+                        boxes[i][1]["value"] = "="
+                        boxes.remove(boxes[i + 1])
                 resultString = resultString + boxes[i][1]["value"]
                 flag = False
                 i += 1

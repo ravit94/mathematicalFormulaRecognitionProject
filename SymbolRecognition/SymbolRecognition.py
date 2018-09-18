@@ -29,7 +29,7 @@ class SymbolRecognition(object):
         # Send the image to Tesseract to recognize it.
         symbol = pytesseract.image_to_string(im, lang='eng', boxes=False,
                                              config='--psm 10 --eom 1 -c tessedit_char_'
-                                                    'whitelist=abcdefghijklmnopqrtsuvwxyz')
+                                                    'whitelist=abcdefghijklmnopqrtsuvwxyz1')
         if correlation.IsEqual(BoundingBoxPath, symbol):
             return latexFormat.ConvertToLatexFormat(symbol)
         # Send the image to Tesseract to recognize it.

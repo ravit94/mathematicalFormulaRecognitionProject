@@ -13,7 +13,7 @@ class BoundingBoxes(object):
       super(BoundingBoxes, self).__init__()
       self.symbolRecognition = SymbolRecognition()
       # openCV return the inside of this symbols as another BB so we will skip over them.
-      self.skipOnceList = ["e", "d", "\\alpha", "\lambda", "0", "6", "9", "a", "b", "g", "o", "p", "O", "P", "Q", "A"]
+      self.skipOnceList = ["e", "d", "\\alpha", "\lambda", "0", "6", "9", "a", "b", "g", "o", "p", "O", "P", "Q", "A", "4"]
       self.skipTwiceList = ["\infty", "\\Theta", "8", "B", "\\beta"]
       # number of times we need to skip
       self.skip = 0

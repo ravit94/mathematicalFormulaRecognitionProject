@@ -1,5 +1,7 @@
 import cv2 as cv
 import os
+import shutil
+
 class OtsuMethod(object):
     """
     OtsuMethod used to convert image into binary image.
@@ -64,6 +66,7 @@ class OtsuMethod(object):
             row = image[y:y + h, x:x + W]
             cv.imwrite(file_path, row)
             i += 1
+        os.remove(binaryImagePath)
         # Return the path to the directory of binary images.
         return directory
 
