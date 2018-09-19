@@ -29,7 +29,7 @@ class ConvertStringToLatexFormat(object):
                      'leftPar'      : '\left ( ',
                      'mult'         : 'X',
                      'omega'        : '\omega',
-                     'pi'           : '\pi',
+                     'pi'           : '\pi ',
                      'rightArrow'   : '\\rightarrow',
                      'rightPar'     : '\\right )',
                      'sig'          : '\sum',
@@ -65,7 +65,7 @@ class ConvertStringToLatexFormat(object):
                     +"\n\\usepackage[latin1]{inputenc}"+"\n" \
                     +"\n\\title{Editable LaTeX file}"+"\n\\date{}".format(time.strftime("%d/%m/%Y")) \
                     +"\n\\begin{document}"+"\n\\maketitle" \
-                    +"\nYou convert the image example.PNG to \LaTeX{} and now you can edit the file!" \
+                    +"\nYou convert the image" + outputFilePath + "to \LaTeX{} and now you can edit the file!" \
                     +"\n\\begin{equation}"+"\n\n" + resultString +"\n\n\\end{equation}"+"\n\n\\end{document}"
       path = outputFilePath.split(".")[0]
       path = path + ".tex"

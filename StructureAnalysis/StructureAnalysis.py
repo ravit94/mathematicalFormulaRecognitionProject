@@ -178,7 +178,8 @@ class StructureAnalysis(object):
                                 j = end
                                 continue
                             if (boxes[j][1]["y"] + 0.6 * boxes[j][1]["h"] < ref["y"] + 0.6 * ref["h"]) and \
-                                    boxes[j][1]["value"] not in self.exception:
+                                    boxes[j][1]["value"] not in self.exception  \
+                                    and abs((boxes[j][1]["y"] + boxes[j][1]["h"]) - (ref["y"] + ref["h"])) > 5:
                                 resultString = resultString + boxes[j][1]["value"]
                             else:
                                 break

@@ -8,7 +8,7 @@ class Correlation(object):
 
     def __init__(self):
         super(Correlation, self).__init__()
-        self.mostCOmmon = ["frac.png", "infinity.png", "infinity2.png", "integral.png", "pi.png"]
+        self.mostCOmmon = ["frac.png", "infinity.png", "infinity2.png", "integral.png", "pi.png", "rightPar1.png", "leftPar1.png"]
 
     def FindCorrelationCoefficient(self, bb):
         """
