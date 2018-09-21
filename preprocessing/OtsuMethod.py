@@ -94,6 +94,10 @@ class OtsuMethod(object):
                         lowers.remove(lowers[i])
                         uppers.remove(uppers[i])
                         continue
+                else:
+                    lowers.remove(lowers[i])
+                    uppers.remove(uppers[i+1])
+                    continue
             i += 1
         i = 0
         while i < len(uppers):

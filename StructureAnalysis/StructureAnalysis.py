@@ -52,7 +52,7 @@ class StructureAnalysis(object):
                         continue
                     # content of integral end with "dx".
                     elif boxes[j][1]["value"] == "d":
-                        if boxes[j + 1][1]["value"] == "x":
+                        if boxes[j + 1][1]["value"].isalpha():
                             lastXcoordinate = boxes[j+1][1]["x"]
                         break
                 boxes.insert(i, (boxes[i][1]["x"], {"x":boxes[i][1]["x"], "y": boxes[i][1]["y"], "h": boxes[i][1]["h"],
@@ -65,7 +65,7 @@ class StructureAnalysis(object):
                 xEndBound = boxes[i][1]["x"] + boxes[i][1]["w"]
                 for j in range(i, len(boxes)):
                     # add the bb that inside the sqrt.
-                    if (boxes[j][1]["x"] > xStartBound and boxes[j][1]["x"] + boxes[j][1]["w"] < xEndBound) or \
+                    if (boxes[j][1]["x"] > xStartBound and boxes[j][1]["x"] + boxes[j][1]["w"] <= xEndBound) or \
                             boxes[j][1]["x"] == xStartBound:
                         lastXcoordinate = boxes[j][1]["x"]
                     # if not the first bb - break from loop.
@@ -140,6 +140,7 @@ class StructureAnalysis(object):
         :param boxes: all the information about the boundingBoxes in the current row.
         :type boxes: Dictionary
         """
+        # flag to indicate if the next node can be exponent.
         flag = False
         resultString = ""
         self.mapToFanc = {"frac": self._FractureHandling, "int": self._IntegralHandling, "sqrt": self._SqrtHandling,
@@ -222,7 +223,7 @@ class StructureAnalysis(object):
                 break
         numerator = self.RecAnalysis(numeratorDict)
         denominator = self.RecAnalysis(denominatorDict)
-        return "\\frac{" + numerator + "}{" + denominator + "}" , i, False
+        return "\\frac{" + numerator + "}{" + denominator + "}" , i, True
 
     def _IntegralHandling (self, boxes, start, lastXcoordinate):
         """
@@ -242,7 +243,8 @@ class StructureAnalysis(object):
             if boxes[i][1]["value"] == '\int_':
                 i += 1
                 continue
-            if boxes[i][1]["y"] < boxes[start][1]["y"]:
+            value = boxes[i][1]["value"].split(" ")[0]
+            if( boxes[i][1]["y"] < boxes[start][1]["y"]) and  value not in self.spacialList:
                 upperDict.append(boxes[i])
             elif boxes[i][1]["y"] > boxes[start][1]["y"] + boxes[start][1]["h"] - 30:
                 lowerDict.append(boxes[i])
@@ -277,7 +279,7 @@ class StructureAnalysis(object):
         if boxes[i][1]["x"] == lastXcoordinate:
             contentDict.append(boxes[i])
         content = self.RecAnalysis(contentDict)
-        return "\sqrt{" + content + "}", i+1, False
+        return "\sqrt{" + content + "}", i+1, True
 
     def _ParenthesisHandling(self, boxes, start, lastXcoordinate):
         """
