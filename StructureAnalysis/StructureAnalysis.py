@@ -7,7 +7,7 @@ class StructureAnalysis(object):
     def __init__(self):
         super(StructureAnalysis, self).__init__()
         self.spacialList = ["frac", "int", "sqrt", "leftPar", "sum"]
-        self.exception = ["=", "+"]
+        self.exception = ["=", "+", "!"]
 
     def Preprocessing(self, boxes):
         """
@@ -15,9 +15,13 @@ class StructureAnalysis(object):
         :param boxes: all the information about the boundingBoxes in the current row.
         :type boxes: Dictionary
         """
+        self._fixIndex(boxes)
         i = 0
         while i != len(boxes):
-            if boxes[i][1]["value"] == '\\frac':
+            if boxes[i][1]["value"] == '\\frac' or boxes[i][1]["value"] == '-':
+                #indicate if there are boxes above and below the fracture line.
+                numFlag = False
+                deNumFlag = False
                 lastXcoordinate = 0
                 data = {"maxY": 1000, "minY": 0, "xCoordinate": 0, "yCoordinate": 0, "isFirst": False}
                 xStartBound = boxes[i][1]["x"]
@@ -31,19 +35,30 @@ class StructureAnalysis(object):
                                 data["yCoordinate"] = boxes[j][1]["y"]
                                 data["isFirst"] = True
                             data["maxY"] = boxes[j][1]["y"]
-                        elif boxes[j][1]["y"] > boxes[i][1]["y"] and boxes[j][1]["y"] + boxes[j][1]["h"] > data["minY"]:
-                            data["minY"] = boxes[j][1]["y"] + boxes[j][1]["h"]
+                            numFlag = True
+                        elif boxes[j][1]["y"] > boxes[i][1]["y"]:
+                            deNumFlag = True
+                            if boxes[j][1]["y"] + boxes[j][1]["h"] > data["minY"]:
+                                data["minY"] = boxes[j][1]["y"] + boxes[j][1]["h"]
                         lastXcoordinate = boxes[j][1]["x"]
                     # if not the first bb - break from loop.
                     elif boxes[j][1]["x"] > xStartBound:
                         break
                 if lastXcoordinate == boxes[i][1]["x"]:
                     boxes[i][1]["value"] = "-"
+                    i += 1
                     continue
+                elif boxes[i][1]["x"] < lastXcoordinate and boxes[i][1]["value"] == "-":
+                    if deNumFlag and numFlag:
+                        boxes[i][1]["value"] = '\\frac'
+                    else:
+                        i += 1
+                        continue
                 boxes.insert(i, (xStartBound, {"x": data["xCoordinate"], "y":  data["yCoordinate"],
                                                "h":  data["minY"] - data["maxY"],
                                                "w": boxes[i][1]["w"], "value": "frac {}".format(lastXcoordinate)}))
                 i += 1
+
             if boxes[i][1]["value"] == '\int_':
                 lastXcoordinate = 0
                 for j in range(i, len(boxes)):
@@ -103,24 +118,26 @@ class StructureAnalysis(object):
                                                "h": boxes[i][1]["h"], "w": boxes[j][1]["x"] - xStartBound,
                                                "value": "sum {}".format(lastXcoordinate)}))
                 i += 1
-            if boxes[i][1]["value"] == 'l' and i < (len(boxes) - 1):
-                if boxes[i + 1][1]["value"] == '\\cdot':
-                    boxes[i][1]["value"] = "i"
-                    boxes.remove(boxes[i + 1])
+
             i += 1
         return boxes
 
-    def _NextIndex(self, box, boxes):
+    def _fixIndex(self,  boxes):
         """
         return the next index
-        :param box: first BB
-        :type box: Dictionary
+        :param boxes: array of BB
+        :type boxes: Dictionary
         """
-        required = box[1]["value"].split(" ")[1]
-        for i in range(boxes.index(box), len(boxes)):
-            if boxes[i][1]["x"] == required:
-                return i
-        return None
+        for i in range(len(boxes) - 3):
+            if boxes[i + 1][1]["value"] == '!':
+                boxes[i + 1][1]["x"] = boxes[i][1]["x"]
+                boxes[i + 1][1]["h"] += boxes[i][1]["h"]
+                boxes.remove(boxes[i])
+            if boxes[i][1]["value"] == 'l':
+                if boxes[i + 1][1]["value"] == '\\cdot':
+                    boxes[i][1]["value"] = "i"
+                    boxes.remove(boxes[i + 1])
+        return boxes
 
 
 

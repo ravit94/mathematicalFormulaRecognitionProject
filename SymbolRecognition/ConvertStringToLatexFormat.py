@@ -44,6 +44,7 @@ class ConvertStringToLatexFormat(object):
           return None
       if symbol.__contains__("."):
           symbol = symbol.split(".")[0]
+          if symbol == '!': return "!"
           if latexFormat.__contains__(symbol):
             return latexFormat[symbol]
           symbol = symbol[:-1]
