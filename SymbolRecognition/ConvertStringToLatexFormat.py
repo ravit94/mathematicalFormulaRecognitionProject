@@ -61,13 +61,13 @@ class ConvertStringToLatexFormat(object):
       :param outputFilePath: path to the output file.
       :type outputFilePath: string
       """
-      latexFormat = "\documentclass[12pt]{article}" + "\n\\usepackage{amsmath}"\
-                    +"\n\\usepackage{graphicx}"+"\n\\usepackage{hyperref}" \
-                    +"\n\\usepackage[latin1]{inputenc}"+"\n" \
-                    +"\n\\title{Editable LaTeX file}"+"\n\\date{}".format(time.strftime("%d/%m/%Y")) \
-                    +"\n\\begin{document}"+"\n\\maketitle" \
-                    +"\nYou convert image in path: " + outputFilePath + "to \LaTeX{} and now you can edit the file!" \
-                    +"\n\\begin{equation}"+"\n\n" + resultString +"\n\n\\end{equation}"+"\n\n\\end{document}"
+
+      latexFormat = "\documentclass[12pt]{article}" + "\n\\usepackage{amsmath}" \
+                    + "\n\\usepackage{graphicx}" + "\n\\usepackage{hyperref}" \
+                    + "\n\\usepackage[latin1]{inputenc}" + "\n" \
+                    + "\n\\title{" + outputFilePath + "}" + "\n\\begin{document}" + "\n\\maketitle" \
+                    + "\n\\begin{align*}" + "\n\n" + resultString + "\n\n\\end{align*}" + "\n\n\\end{document}"
+
       path = outputFilePath.split(".")[0]
       path = path + ".tex"
       text_file = open(path, "w+")

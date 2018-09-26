@@ -133,7 +133,7 @@ class StructureAnalysis(object):
                 boxes[i + 1][1]["x"] = boxes[i][1]["x"]
                 boxes[i + 1][1]["h"] += boxes[i][1]["h"]
                 boxes.remove(boxes[i])
-            if boxes[i][1]["value"] == 'l':
+            if boxes[i][1]["value"] == 'l' or boxes[i][1]["value"] == '1':
                 if boxes[i + 1][1]["value"] == '\\cdot':
                     boxes[i][1]["value"] = "i"
                     boxes.remove(boxes[i + 1])
@@ -204,7 +204,47 @@ class StructureAnalysis(object):
                             j += 1
                         i = j
                         resultString = resultString + "}"
+                        flag = True
                         continue
+
+
+
+
+
+
+
+                    elif boxes[i][1]["y"]  > ref["y"] + 0.4 * ref["h"]and \
+                            boxes[i][1]["value"] not in self.exception and ref["value"] not in self.exception:
+                        if boxes[i][1]["value"] == "-":
+                            if i < len(boxes) - 1:
+                                if not (boxes[i+1][1]["y"] > ref["y"]  + 0.4 * ref["h"] and \
+                            abs((boxes[i+1][1]["y"] + boxes[i+1][1]["h"]) - (ref["y"] + ref["h"])) > 10 and \
+                            boxes[i][1]["value"] not in self.exception and ref["value"] not in self.exception):
+                                    flag = True
+                                    continue
+                        resultString = resultString + "_{"
+                        j = i
+                        while j != len(boxes):
+                            if boxes[j][1]["value"].split(" ")[0] in self.spacialList:
+                                lastXcoordinate = int(boxes[j][1]["value"].split(" ")[1])
+                                string, end , flag = self.mapToFanc[boxes[j][1]["value"].split(" ")[0]](boxes, j + 1,
+                                                                                                 lastXcoordinate)
+                                resultString = resultString + string
+                                j = end
+                                continue
+                            if ( boxes[j][1]["y"]  > ref["y"] + 0.4 * ref["h"]) and \
+                                    boxes[j][1]["value"] not in self.exception:
+                                resultString = resultString + boxes[j][1]["value"]
+                            else:
+                                break
+                            j += 1
+                        i = j
+                        resultString = resultString + "}"
+                        flag = True
+                        continue
+
+
+
                 if i < (len(boxes) - 1):
                     if abs(boxes[i + 1][1]["x"] - boxes[i][1]["x"]) == 0.5:
                         boxes[i][1]["value"] = "="
