@@ -35,7 +35,7 @@ class SymbolRecognition(object):
         # Send the image to Tesseract to recognize it.
         symbol = pytesseract.image_to_string(im, lang='eng', boxes=False,
                                                       config='--psm 10 --eom 1 -c tessedit_char_'
-                                                             'whitelist=-+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789')
+                                                             'whitelist=-+ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789')
         if not correlation.IsEqual(BoundingBoxPath, symbol) and symbol not in exceptionals:
                 symbol = correlation.FindCorrelationCoefficient(BoundingBoxPath)
 

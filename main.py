@@ -27,7 +27,7 @@ for file in arglist[1:]:
         res = symbolRecognition.ocr(binaryImageDirPath + "//" + row)
         if res == '' or res.__contains__("\n") or hasNumbers(res):
             boxes = boundingBoxes.SegmentImageToBoxes(binaryImageDirPath + "//" + row)
-            resultString = resultString + structureAnalysis.StructureAnalysis(boxes) + "\n"
+            resultString = resultString + "\n\\begin{align*}" +  structureAnalysis.StructureAnalysis(boxes)  + "\n\\end{align*}\n"
         else:
             resultString = resultString + res + "\n"
     # delete the temporary directory

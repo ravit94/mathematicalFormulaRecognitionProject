@@ -1,4 +1,4 @@
-import time 
+import os
 class ConvertStringToLatexFormat(object):
    """
    BoundingBoxes used to segment binary image into boxes.
@@ -38,7 +38,8 @@ class ConvertStringToLatexFormat(object):
                      'sqrt'         : '\sqrt',
                      'Theta'        : '\Theta',
                      'Unequal'      : '\\neq',
-                     'Union'        : '\cup'}
+                     'Union'        : '\cup',
+                     'psic'         : ','}
 
       if symbol == None:
           return None
@@ -61,12 +62,13 @@ class ConvertStringToLatexFormat(object):
       :param outputFilePath: path to the output file.
       :type outputFilePath: string
       """
-
+      title = outputFilePath.split("\\")[-1]
       latexFormat = "\documentclass[12pt]{article}" + "\n\\usepackage{amsmath}" \
                     + "\n\\usepackage{graphicx}" + "\n\\usepackage{hyperref}" \
                     + "\n\\usepackage[latin1]{inputenc}" + "\n" \
-                    + "\n\\title{" + outputFilePath + "}" + "\n\\begin{document}" + "\n\\maketitle" \
-                    + "\n\\begin{align*}" + "\n\n" + resultString + "\n\n\\end{align*}" + "\n\n\\end{document}"
+                    + "\n\\title{" + title + "}" + "\n\\begin{document}" + "\n\\maketitle " \
+                    + resultString  + "\n\\end{document}"
+
 
       path = outputFilePath.split(".")[0]
       path = path + ".tex"

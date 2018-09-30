@@ -1,4 +1,3 @@
-
 class StructureAnalysis(object):
     """
     StructureAnalysis method aim is to find the relationship between symbols.
@@ -25,7 +24,7 @@ class StructureAnalysis(object):
                 lastXcoordinate = 0
                 data = {"maxY": 1000, "minY": 0, "xCoordinate": 0, "yCoordinate": 0, "isFirst": False}
                 xStartBound = boxes[i][1]["x"]
-                xEndBound = boxes[i][1]["x"] + boxes[i][1]["w"]
+                xEndBound = boxes[i][1]["x"] + boxes[i][1]["w"] + 1
                 for j in range(i, len(boxes)):
                     # add the bb that above or below the fracture line.
                     if (boxes[j][1]["x"] > xStartBound and boxes[j][1]["x"] + boxes[j][1]["w"] <= xEndBound) or boxes[j][1]["x"] == xStartBound:
@@ -55,7 +54,7 @@ class StructureAnalysis(object):
                         i += 1
                         continue
                 boxes.insert(i, (xStartBound, {"x": data["xCoordinate"], "y":  data["yCoordinate"],
-                                               "h":  data["minY"] - data["maxY"],
+                                               "h":  abs(data["minY"] - data["maxY"]),
                                                "w": boxes[i][1]["w"], "value": "frac {}".format(lastXcoordinate)}))
                 i += 1
 
@@ -165,7 +164,7 @@ class StructureAnalysis(object):
         i = 0
         while i < len(boxes):
             if boxes[i][1]["value"].split(" ")[0] in self.spacialList:
-                lastXcoordinate = int(boxes[i][1]["value"].split(" ")[1])
+                lastXcoordinate = int(float(boxes[i][1]["value"].split(" ")[1]))
                 string, end, flag = self.mapToFanc[boxes[i][1]["value"].split(" ")[0]](boxes, i+1, lastXcoordinate)
                 resultString = resultString + string
                 i = end
@@ -189,7 +188,7 @@ class StructureAnalysis(object):
                         j = i
                         while j != len(boxes):
                             if boxes[j][1]["value"].split(" ")[0] in self.spacialList:
-                                lastXcoordinate = int(boxes[j][1]["value"].split(" ")[1])
+                                lastXcoordinate = int(float(boxes[j][1]["value"].split(" ")[1]))
                                 string, end , flag = self.mapToFanc[boxes[j][1]["value"].split(" ")[0]](boxes, j + 1,
                                                                                                  lastXcoordinate)
                                 resultString = resultString + string
@@ -207,12 +206,7 @@ class StructureAnalysis(object):
                         flag = True
                         continue
 
-
-
-
-
-
-
+                    # recognize below exponential relation
                     elif boxes[i][1]["y"]  > ref["y"] + 0.4 * ref["h"]and \
                             boxes[i][1]["value"] not in self.exception and ref["value"] not in self.exception:
                         if boxes[i][1]["value"] == "-":
@@ -226,7 +220,7 @@ class StructureAnalysis(object):
                         j = i
                         while j != len(boxes):
                             if boxes[j][1]["value"].split(" ")[0] in self.spacialList:
-                                lastXcoordinate = int(boxes[j][1]["value"].split(" ")[1])
+                                lastXcoordinate = int(float(boxes[j][1]["value"].split(" ")[1]))
                                 string, end , flag = self.mapToFanc[boxes[j][1]["value"].split(" ")[0]](boxes, j + 1,
                                                                                                  lastXcoordinate)
                                 resultString = resultString + string
