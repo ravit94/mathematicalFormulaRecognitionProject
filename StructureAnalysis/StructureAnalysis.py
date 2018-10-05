@@ -5,7 +5,7 @@ class StructureAnalysis(object):
 
     def __init__(self):
         super(StructureAnalysis, self).__init__()
-        self.spacialList = ["frac", "int", "sqrt", "leftPar", "sum"]
+        self.spacialList = ["frac", "int", "sqrt", "leftPar", "sum", "lim"]
         self.exception = ["=", "+", "!"]
 
     def Preprocessing(self, boxes):
@@ -18,6 +18,14 @@ class StructureAnalysis(object):
         i = 0
         while i != len(boxes):
             if boxes[i][1]["value"] == '\\frac' or boxes[i][1]["value"] == '-':
+                if i < len(boxes) - 1:
+                    if (boxes[i][1]["value"] == '\\frac' or boxes[i][1]["value"] == '-') and \
+                        (boxes[i + 1][1]["value"] == '\\frac' or boxes[i + 1][1]["value"] == "-"):
+                        if abs(boxes[i + 1][1]["x"] - boxes[i][1]["x"]) == 0.5:
+                            boxes[i][1]["value"] = "="
+                            boxes.remove(boxes[i + 1])
+                            i += 1
+                            continue
                 #indicate if there are boxes above and below the fracture line.
                 numFlag = False
                 deNumFlag = False
@@ -117,7 +125,28 @@ class StructureAnalysis(object):
                                                "h": boxes[i][1]["h"], "w": boxes[j][1]["x"] - xStartBound,
                                                "value": "sum {}".format(lastXcoordinate)}))
                 i += 1
-
+            if boxes[i][1]["value"] == 'l':
+                if "'value': 'l'" and "'value': 'i'" and "'value': 'm'" in boxes.__str__():
+                    k = i - 5
+                    if k < 0: k = 0
+                    # indicate the first bb
+                    isFirstFlag = True
+                    xStartBound = 0
+                    lastXcoordinate = 0
+                    limit = boxes[i][1]["y"] + boxes[i][1]["h"]
+                    for j in range(k, len(boxes)):
+                        if boxes[j][1]["y"] > limit or boxes[j][1]["value"] in ["l", "i", "m"]:
+                            lastXcoordinate = boxes[j][1]["x"]
+                            if isFirstFlag:
+                                xStartBound = j
+                                isFirstFlag = False
+                        else:
+                            break
+                    boxes.insert(xStartBound, (xStartBound, {"x": boxes[xStartBound][1]["x"], "y": boxes[i][1]["y"],
+                                                         "h": boxes[i][1]["h"],
+                                                         "w": boxes[j][1]["x"] - xStartBound,
+                                                         "value": "lim {}".format(lastXcoordinate)}))
+                i += 1
             i += 1
         return boxes
 
@@ -127,15 +156,21 @@ class StructureAnalysis(object):
         :param boxes: array of BB
         :type boxes: Dictionary
         """
+        i = 0
+
         for i in range(len(boxes) - 3):
             if boxes[i + 1][1]["value"] == '!':
                 boxes[i + 1][1]["x"] = boxes[i][1]["x"]
                 boxes[i + 1][1]["h"] += boxes[i][1]["h"]
                 boxes.remove(boxes[i])
-            if boxes[i][1]["value"] == 'l' or boxes[i][1]["value"] == '1':
+            elif boxes[i][1]["value"] == 'l' or boxes[i][1]["value"] == '1':
                 if boxes[i + 1][1]["value"] == '\\cdot':
                     boxes[i][1]["value"] = "i"
                     boxes.remove(boxes[i + 1])
+                elif i < (len(boxes) - 4):
+                    if boxes[i + 2][1]["value"] == '\\cdot' and boxes[i+3][1]["value"] != "!":
+                        boxes[i][1]["value"] = "i"
+                        boxes.remove(boxes[i + 2])
         return boxes
 
 
@@ -160,7 +195,7 @@ class StructureAnalysis(object):
         flag = False
         resultString = ""
         self.mapToFanc = {"frac": self._FractureHandling, "int": self._IntegralHandling, "sqrt": self._SqrtHandling,
-                          "leftPar": self._ParenthesisHandling, "sum": self._SumHandling}
+                          "leftPar": self._ParenthesisHandling, "sum": self._SumHandling, "lim": self._LimHandling}
         i = 0
         while i < len(boxes):
             if boxes[i][1]["value"].split(" ")[0] in self.spacialList:
@@ -400,3 +435,33 @@ class StructureAnalysis(object):
         if lower.__contains__("^{-}"):
             lower = lower.replace("^{-}", "=")
         return "\sum_{" + lower + "}^{" + upper + "} ", i + 1 , True
+    def _LimHandling(self, boxes, start, lastXcoordinate):
+        """
+        handle the case of lim, finds the boundaries and returns a string representing the lim
+        :param boxes: all the information about the boundingBoxes in the fracture.
+        :type boxes: Dictionary
+        :param start: the index of the first BB.
+        :type start: int
+        :param lastXcoordinate: the index of the last BB.
+        :type lastXcoordinate: int
+        """
+        i = start
+        limit = 0
+        res = ""
+        while boxes[i][1]["x"] <= lastXcoordinate:
+            if boxes[i][1]["value"] != "l":
+                i = i + 1
+                continue
+            limit = boxes[i][1]["y"] + boxes[i][1]["h"]
+            break
+        i = start
+        while boxes[i][1]["x"] <= lastXcoordinate:
+            if boxes[i][1]["value"] in ["l", "i", "m"]:
+                i = i + 1
+                continue
+            if boxes[i][1]["y"] > limit:
+                res = res + boxes[i][1]["value"]
+            else:
+                break
+            i += 1
+        return "\lim_{" + res + "} ", i , True
