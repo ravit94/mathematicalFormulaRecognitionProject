@@ -42,7 +42,7 @@ class Correlation(object):
 
     def IsEqual(self, bb, symbol):
         """
-        Compare to the bondingBox to the relevant template
+        Compare the bondingBox to the relevant template
         :param bb: one of the boundingBoxes
         :type bb: Image
         :param symbol: template of the symbol
