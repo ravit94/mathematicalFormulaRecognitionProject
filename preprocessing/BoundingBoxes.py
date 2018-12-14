@@ -13,11 +13,7 @@ class BoundingBoxes(object):
       super(BoundingBoxes, self).__init__()
       self.symbolRecognition = SymbolRecognition()
       # openCV return the inside of this symbols as another BB so we will skip over them.
-      self.skipOnceList = ["e", "d", "\\alpha", "\lambda", "0", "6", "9", "a", "b", "o", "p", "O", "P", "Q", "A",
-                           "4", "\\beta"]
-      self.skipTwiceList = ["\infty", "\\Theta", "8", "B", "g"]
-      # number of times we need to skip
-      self.skip = 0
+      self.lastBox = {"x": 0, "y": 0, "h": 0, "w": 0, "value": '1'}
 
    def SegmentImageToBoxes(self, binaryImagePath):
       """
@@ -39,12 +35,12 @@ class BoundingBoxes(object):
       directory = ""
       # for each boundingBoxes - save as image.
       for i in range(1, len(contours)):
-         if self.skip > 0:
-            self.skip = self.skip -1
-            continue
+
          currentBoundingBox = contours[i]
          # The coordinate of the boundingBoxes.
          x, y, w, h = cv2.boundingRect(currentBoundingBox)
+         if self._CheckIfContains(x, y, w, h):
+            continue
          # Crop each box in the image and save it.
          letter = image[y:y + h, x:x + w]
          file_path = "C:/temp/" + str(i) + '.png'
@@ -64,13 +60,18 @@ class BoundingBoxes(object):
                   boundingBoxes.get(x)["value"] = "="
                   continue
             x += 0.5
-
          boundingBoxes.update({x: {"x": x, "y": y, "h": h, "w": w, "value": value}})
-         if value in self.skipOnceList:
-            self.skip = 1
-         elif value in self.skipTwiceList:
-            self.skip = 2
+         self.lastBox = {"x": x, "y": y, "h": h, "w": w, "value": value}
       shutil.rmtree(directory)
       # Return array of boundingBoxes sorted by
       return sorted(boundingBoxes.items())
+
+
+   def _CheckIfContains(self, x, y, w, h):
+      if  x + w < self.lastBox['x'] + self.lastBox['w'] and y + h < self.lastBox['y'] + self.lastBox['h'] \
+              and x < self.lastBox['x'] + self.lastBox['w'] and y < self.lastBox['y'] + self.lastBox['h']\
+              and x > self.lastBox['x'] and y > self.lastBox['y'] and self.lastBox['value'] != '\sqrt':
+         return True
+      return False
+
 

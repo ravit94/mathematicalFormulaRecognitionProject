@@ -21,6 +21,7 @@ class SymbolRecognition(object):
         # Open the BoundingBox image
         im = Image.open(BoundingBoxPath)
         exceptionals = ['-', '+']
+        flag = True
         im.filter(ImageFilter.SHARPEN)
         # Define the command
         correlation = Correlation()
@@ -37,8 +38,8 @@ class SymbolRecognition(object):
                                                       config='--psm 10 --eom 1 -c tessedit_char_'
                                                              'whitelist=-+ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz023456789')
         if not correlation.IsEqual(BoundingBoxPath, symbol) and symbol not in exceptionals:
-                symbol = correlation.FindCorrelationCoefficient(BoundingBoxPath)
-
+                symbol, flag = correlation.FindCorrelationCoefficient(BoundingBoxPath)
+        if not flag: symbol = correlation.FindMostSimilarTemplate(BoundingBoxPath)
         return latexFormat.ConvertToLatexFormat(symbol)
 
     def ocr(self, BoundingBoxPath):

@@ -9,7 +9,9 @@ class Correlation(object):
 
     def __init__(self):
         super(Correlation, self).__init__()
-        self.mostCOmmon = ["frac.png", "infinity.png", "infinity2.png", 'sig.png', "integral.png", "pi.png", "rightPar1.png", "leftPar1.png"]
+        self.mostCOmmon = ["frac.png", "infinity.png", "infinity2.png", "integral.png", 'sig.png', "pi.png", "rightPar1.png", "leftPar1.png"]
+        self.minDif = 100000
+        self.minTemplate = "?"
 
     def FindCorrelationCoefficient(self, bb):
         """
@@ -20,9 +22,8 @@ class Correlation(object):
         """
         size = 500
         imageA = cv2.imread(bb)
-        # a dictionary that save the error of each template
-        gaps = {}
         templates = os.listdir("Templates")
+
         # go over all the templates and insert to gaps, start with the most common
         for template in self.mostCOmmon:
             imageB = cv2.imread("Templates\\" + template)
@@ -30,15 +31,15 @@ class Correlation(object):
             templates.remove(template)
             # find the smallest error.
             if diff < 11:
-                return template
+                return template, True
         for template in templates:
             imageB =cv2.imread("Templates\\" + template)
             diff = self.CompareImages(imageA, imageB)
             # find the smallest error.
-            if diff < 10:
-                return template
+            if diff < 9.992:
+                return template, True
         # return the name of the most similar template.
-        return None
+        return self.minTemplate, False
 
     def IsEqual(self, bb, symbol):
         """
@@ -61,7 +62,7 @@ class Correlation(object):
             imageB = cv2.imread(path + "\\" + template)
             diff = self.CompareImages(imageA, imageB)
             # find the smallest error.
-            if diff < 9:
+            if diff < 9.5:
                 return True
         return False
 
@@ -81,3 +82,32 @@ class Correlation(object):
         err /= float(grayA.shape[0] * grayA.shape[1])
 
         return err / 1000
+
+    def FindMostSimilarTemplate(self, bb):
+        """
+        find the correlation coefficient between given BB to each one of the templates
+        and return the max.
+        :param bb: one of the boundingBoxes
+        :type bb: Image
+        """
+        size = 500
+        imageA = cv2.imread(bb)
+        path = "Digits&Letters\\"
+        if not os.path.isdir(path):
+            return False
+        symbols = os.listdir(path)
+        for templates in symbols:
+            templateList = os.listdir(path + templates)
+            for template in templateList:
+                if not os.path.isfile(path + templates + "\\" + template):
+                    return False
+                imageB = cv2.imread(path + templates + "\\" + template)
+                diff = self.CompareImages(imageA, imageB)
+                # find the smallest error.
+                if diff < 9:
+                    return template
+                if diff < self.minDif:
+                    self.minDif = diff
+                    self.minTemplate = templates
+        self.minTemplate = self.minTemplate = '?' if self.minDif > 14 else self.minTemplate.split(".")[0]
+        return self.minTemplate
