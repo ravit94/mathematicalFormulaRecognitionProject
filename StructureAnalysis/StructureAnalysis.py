@@ -98,13 +98,19 @@ class StructureAnalysis(object):
                                                "w": boxes[i][1]["w"], "value": "sqrt {}".format(lastXcoordinate)}))
                 i += 1
             if boxes[i][1]["value"] == '\left ( ':
+                # When find left - add 1 to the counter and when find right - sub 1.
+                counter = 1
                 lastXcoordinate = 0
                 xStartBound = boxes[i][1]["x"]
-                for j in range(i, len(boxes)):
+                for j in range(i + 1, len(boxes)):
                     # add the bb that inside the Parenthesis.
-                    if boxes[j][1]["value"] == '\\right )' and abs(boxes[j][1]["y"] - boxes[i][1]["y"]) < 2 :
-                        lastXcoordinate = boxes[j][1]["x"]
-                        break
+                    if boxes[j][1]["value"] == '\\right )':
+                        counter -= 1
+                        if not counter:
+                            lastXcoordinate = boxes[j][1]["x"]
+                            break
+                    elif boxes[j][1]["value"] == '\left ( ':
+                        counter += 1
                 boxes.insert(i, (xStartBound, {"x": boxes[i][1]["x"], "y": boxes[i][1]["y"],
                                                "h": boxes[i][1]["h"],
                                                "w": boxes[j][1]["x"] - xStartBound,
@@ -113,7 +119,7 @@ class StructureAnalysis(object):
             if boxes[i][1]["value"] == '\sum':
                 lastXcoordinate = 0
                 xStartBound = boxes[i][1]["x"]
-                xEndBound = boxes[i][1]["x"] + boxes[i][1]["w"] +20
+                xEndBound = boxes[i][1]["x"] + boxes[i][1]["w"] + 20
                 for j in range(i, len(boxes)):
                     # add the bb that above or below the fracture line.
                     if (boxes[j][1]["x"] >= xStartBound and boxes[j][1]["x"] + boxes[j][1]["w"] < xEndBound) or boxes[j][1]["x"] == xStartBound:
@@ -295,11 +301,8 @@ class StructureAnalysis(object):
         """
         numeratorDict = []
         denominatorDict = []
-        i = start
+        i = start + 1
         while boxes[i][1]["x"] <= lastXcoordinate:
-            if boxes[i][1]["value"] == '\\frac':
-                i += 1
-                continue
             if boxes[i][1]["y"] < boxes[start][1]["y"]:
                 numeratorDict.append(boxes[i])
             else:
@@ -307,8 +310,8 @@ class StructureAnalysis(object):
             i += 1
             if i == len(boxes):
                 break
-        numerator = self.RecAnalysis(numeratorDict)
-        denominator = self.RecAnalysis(denominatorDict)
+        numerator = self.RecAnalysis(self._FixPar(numeratorDict))
+        denominator = self.RecAnalysis(self._FixPar(denominatorDict))
         return "\\frac{" + numerator + "}{" + denominator + "}" , i, True
 
     def _IntegralHandling (self, boxes, start, lastXcoordinate):
@@ -465,3 +468,15 @@ class StructureAnalysis(object):
                 break
             i += 1
         return "\lim_{" + res + "} ", i , True
+
+    def _FixPar(self , boxes):
+        i = 0
+        while i != len(boxes):
+            if boxes[i][1]["value"].startswith('leftPar'):
+                for j in range(i + 1, len(boxes)):
+                    # add the bb that inside the Parenthesis.
+                    if boxes[j][1]["value"] == '\\right )':
+                        boxes[i][1]["value"] = "leftPar {}".format(boxes[j][1]['x'])
+                        break
+            i += 1
+        return boxes
