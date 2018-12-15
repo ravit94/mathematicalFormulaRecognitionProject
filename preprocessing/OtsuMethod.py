@@ -9,6 +9,11 @@ class OtsuMethod(object):
 
     def __init__(self):
         super(OtsuMethod, self).__init__()
+        if os.path.isdir("C:/rows"):
+            shutil.rmtree("C:/rows")
+        if os.path.isdir("C:/temp"):
+            shutil.rmtree("C:/temp")
+
 
     def ConvertToBinaryImage(self, imagePath):
         """

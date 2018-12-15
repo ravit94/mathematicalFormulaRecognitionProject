@@ -11,6 +11,7 @@ def hasNumbers(inputString):
     return any(char.isdigit() for char in inputString)
 
 
+
 arglist = sys.argv
 otsu = OtsuMethod()
 boundingBoxes = BoundingBoxes()
