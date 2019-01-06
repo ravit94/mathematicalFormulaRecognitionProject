@@ -20,8 +20,9 @@ class StructureAnalysis(object):
             if boxes[i][1]["value"] == '\\frac' or boxes[i][1]["value"] == '-':
                 if i < len(boxes) - 1:
                     if (boxes[i][1]["value"] == '\\frac' or boxes[i][1]["value"] == '-') and \
-                        (boxes[i + 1][1]["value"] == '\\frac' or boxes[i + 1][1]["value"] == "-"):
-                        if abs(boxes[i + 1][1]["x"] - boxes[i][1]["x"]) == 0.5:
+                            (boxes[i + 1][1]["value"] == '\\frac' or boxes[i + 1][1]["value"] == "-"):
+                        if abs(boxes[i + 1][1]["w"] - boxes[i][1]["w"]) < 2 and abs(
+                                boxes[i + 1][1]["h"] - boxes[i][1]["h"]) < 2:
                             boxes[i][1]["value"] = "="
                             boxes.remove(boxes[i + 1])
                             i += 1
@@ -77,10 +78,14 @@ class StructureAnalysis(object):
                         if boxes[j + 1][1]["value"].isalpha():
                             lastXcoordinate = boxes[j+1][1]["x"]
                         break
-                boxes.insert(i, (boxes[i][1]["x"], {"x":boxes[i][1]["x"], "y": boxes[i][1]["y"], "h": boxes[i][1]["h"],
+                try:
+                    boxes.insert(i, (boxes[i][1]["x"], {"x":boxes[i][1]["x"], "y": boxes[i][1]["y"], "h": boxes[i][1]["h"],
                                 "w": boxes[j + 1][1]["w"] + boxes[j + 1][1]["x"] - boxes[i][1]["x"],
                                 "value": "int {}".format(lastXcoordinate)}))
-                i += 1
+                    i += 1
+                except:
+                    pass
+
             if boxes[i][1]["value"] == '\\sqrt':
                 lastXcoordinate = 0
                 xStartBound = boxes[i][1]["x"]
@@ -162,8 +167,6 @@ class StructureAnalysis(object):
         :param boxes: array of BB
         :type boxes: Dictionary
         """
-        i = 0
-
         for i in range(len(boxes) - 3):
             if boxes[i + 1][1]["value"] == '!':
                 boxes[i + 1][1]["x"] = boxes[i][1]["x"]
@@ -330,8 +333,11 @@ class StructureAnalysis(object):
         i = start
         while boxes[i][1]["x"] < lastXcoordinate:
             if boxes[i][1]["value"] == '\int_':
-                i += 1
-                continue
+                if i < (boxes.__len__() - 1):
+                    i += 1
+                    continue
+                else:
+                    return "\int_{}", i, True
             value = boxes[i][1]["value"].split(" ")[0]
             if( boxes[i][1]["y"] < boxes[start][1]["y"]) and  value not in self.spacialList:
                 upperDict.append(boxes[i])
@@ -360,15 +366,18 @@ class StructureAnalysis(object):
         :param lastXcoordinate: the index of the last BB.
         :type lastXcoordinate: int
         """
-        i = start + 1
-        contentDict = []
-        while boxes[i][1]["x"] < lastXcoordinate:
-            contentDict.append(boxes[i])
-            i += 1
-        if boxes[i][1]["x"] == lastXcoordinate:
-            contentDict.append(boxes[i])
-        content = self.RecAnalysis(contentDict)
-        return "\sqrt{" + content + "}", i+1, True
+        try:
+            i = start + 1
+            contentDict = []
+            while boxes[i][1]["x"] < lastXcoordinate:
+                contentDict.append(boxes[i])
+                i += 1
+            if boxes[i][1]["x"] == lastXcoordinate:
+                contentDict.append(boxes[i])
+            content = self.RecAnalysis(contentDict)
+            return "\sqrt{" + content + "}", i+1, True
+        except:
+            return "", start, True
 
     def _ParenthesisHandling(self, boxes, start, lastXcoordinate):
         """
@@ -422,22 +431,28 @@ class StructureAnalysis(object):
         upperDict = []
         lowerDict = []
         i = start
-        while boxes[i][1]["x"] <= lastXcoordinate:
-            if boxes[i][1]["value"] == '\sum':
+        try:
+            while boxes[i][1]["x"] <= lastXcoordinate:
+                if boxes[i][1]["value"] == '\sum':
+                    if i < (boxes.__len__() - 1):
+                        i += 1
+                        continue
+                    else:
+                        return "\sum_{}", i, True
+                if boxes[i][1]["y"] < boxes[start][1]["y"]:
+                    upperDict.append(boxes[i])
+                elif boxes[i][1]["y"] > boxes[start][1]["y"] + boxes[start][1]["h"]:
+                    lowerDict.append(boxes[i])
+                if boxes[i][1]["x"] == lastXcoordinate:
+                    break
                 i += 1
-                continue
-            if boxes[i][1]["y"] < boxes[start][1]["y"]:
-                upperDict.append(boxes[i])
-            elif boxes[i][1]["y"] > boxes[start][1]["y"] + boxes[start][1]["h"]:
-                lowerDict.append(boxes[i])
-            if boxes[i][1]["x"] == lastXcoordinate:
-                break
-            i += 1
-        lower = self.RecAnalysis(lowerDict)
-        upper = self.RecAnalysis(upperDict)
-        if lower.__contains__("^{-}"):
-            lower = lower.replace("^{-}", "=")
-        return "\sum_{" + lower + "}^{" + upper + "} ", i + 1 , True
+            lower = self.RecAnalysis(lowerDict)
+            upper = self.RecAnalysis(upperDict)
+            if lower.__contains__("^{-}"):
+                lower = lower.replace("^{-}", "=")
+            return "\sum_{" + lower + "}^{" + upper + "} ", i + 1 , True
+        except:
+            return "\sum_{} ", start, True
     def _LimHandling(self, boxes, start, lastXcoordinate):
         """
         handle the case of lim, finds the boundaries and returns a string representing the lim
@@ -460,8 +475,11 @@ class StructureAnalysis(object):
         i = start
         while boxes[i][1]["x"] <= lastXcoordinate:
             if boxes[i][1]["value"] in ["l", "i", "m"]:
-                i = i + 1
-                continue
+                if i < (boxes.__len__() - 1):
+                    i += 1
+                    continue
+                else:
+                    return "\lim_{}", i, True
             if boxes[i][1]["y"] > limit:
                 res = res + boxes[i][1]["value"]
             else:

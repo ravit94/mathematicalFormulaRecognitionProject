@@ -28,6 +28,12 @@ class BoundingBoxes(object):
       image[image == 0] = 255
       image[image == 1] = 0
       im2 = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+      if (im2.shape[0] < 130) and (im2.shape[1] / im2.shape[0]) > 3.5:
+         im2 = cv2.resize(im2, (4 * im2.shape[1], 4 * im2.shape[0]), interpolation=cv2.INTER_CUBIC)
+         cv2.imwrite(binaryImagePath, im2)
+         image = cv2.imread(binaryImagePath)
+
       ret, thresh = cv2.threshold(im2, 127, 255, 0)
       # Find all the contours using openCV function.
       im3, contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -53,7 +59,13 @@ class BoundingBoxes(object):
          cv2.imwrite(file_path, letter)
          value = self.symbolRecognition.Recognize(file_path)
          if value == '\sum':
-            x -= 5
+            x -= 7.5
+         if value == '\cdot':
+            if w > h + 10:
+               value = '\\frac'
+         if value == '\\frac':
+            if abs(w - h) < 5:
+               value = '\cdot'
          if boundingBoxes.__contains__(x):
             if value == boundingBoxes.get(x)["value"]:
                if (value == '\\frac') or (value == "-"):
@@ -70,7 +82,7 @@ class BoundingBoxes(object):
    def _CheckIfContains(self, x, y, w, h):
       if  x + w < self.lastBox['x'] + self.lastBox['w'] and y + h < self.lastBox['y'] + self.lastBox['h'] \
               and x < self.lastBox['x'] + self.lastBox['w'] and y < self.lastBox['y'] + self.lastBox['h']\
-              and x > self.lastBox['x'] and y > self.lastBox['y'] and self.lastBox['value'] != '\sqrt':
+              and x > self.lastBox['x'] and y > self.lastBox['y'] and self.lastBox['value'] != '\sqrt'  or (h < 6 and w < 6):
          return True
       return False
 

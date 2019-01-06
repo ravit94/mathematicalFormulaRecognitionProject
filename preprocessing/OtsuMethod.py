@@ -22,7 +22,9 @@ class OtsuMethod(object):
         :param imagePath: path to the image we want to convert into binary image
         :type imagePath: string
         """
-        img = cv.imread(imagePath, 0)
+        img = cv.imread(imagePath,0)
+
+
         ret, binaryImage = cv.threshold(img, 127, 255, cv.THRESH_BINARY_INV)
 
         ## (3) minAreaRect on the nozeros
@@ -57,6 +59,7 @@ class OtsuMethod(object):
         image = cv.imread(binaryImagePath)
         uppers, lowers = self.boundingHandle(uppers, lowers)
         i = 0
+        directory = None
         while i != len(uppers):
             file_path = "C:/rows/" + str(i) + '.png'
             directory = os.path.dirname(file_path)
@@ -64,7 +67,7 @@ class OtsuMethod(object):
                 os.stat(directory)
             except:
                 os.mkdir(directory)
-            y = uppers[i] - 20
+            y = abs(uppers[i] - 20)
             x = 0
             h = (lowers[i] - uppers[i]) + 40
 

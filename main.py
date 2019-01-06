@@ -13,15 +13,19 @@ def hasNumbers(inputString):
 
 
 arglist = sys.argv
+files = os.listdir(arglist[1])
 otsu = OtsuMethod()
 boundingBoxes = BoundingBoxes()
 symbolRecognition = SymbolRecognition()
 convertStringToLatexFormat = ConvertStringToLatexFormat()
 structureAnalysis = StructureAnalysis()
-for file in arglist[1:]:
-    imagePath = file
+for file in files:
+    imagePath = arglist[1] + "\\" + file
     # get the path to rows directory
     binaryImageDirPath = otsu.ConvertToBinaryImage(imagePath)
+    if not binaryImageDirPath:
+        print ("Can't find relevant content in the image")
+        break
     rows = os.listdir(binaryImageDirPath)
     resultString = ""
     for row in rows:
