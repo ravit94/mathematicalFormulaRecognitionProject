@@ -54,5 +54,4 @@ class SymbolRecognition(object):
         pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
         # Send the image to Tesseract to recognize it.
         symbol = pytesseract.image_to_string(im)
-
         return symbol

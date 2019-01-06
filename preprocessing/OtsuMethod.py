@@ -9,6 +9,7 @@ class OtsuMethod(object):
 
     def __init__(self):
         super(OtsuMethod, self).__init__()
+        # remove help folders in case it exist from last ran.
         if os.path.isdir("C:/rows"):
             shutil.rmtree("C:/rows")
         if os.path.isdir("C:/temp"):
@@ -22,11 +23,8 @@ class OtsuMethod(object):
         :param imagePath: path to the image we want to convert into binary image
         :type imagePath: string
         """
-        img = cv.imread(imagePath,0)
-
-
+        img = cv.imread(imagePath, 0)
         ret, binaryImage = cv.threshold(img, 127, 255, cv.THRESH_BINARY_INV)
-
         ## (3) minAreaRect on the nozeros
         pts = cv.findNonZero(binaryImage)
         ret = cv.minAreaRect(pts)
@@ -61,6 +59,7 @@ class OtsuMethod(object):
         i = 0
         directory = None
         while i != len(uppers):
+            # create help folder named "row" and write each row
             file_path = "C:/rows/" + str(i) + '.png'
             directory = os.path.dirname(file_path)
             try:
@@ -89,34 +88,37 @@ class OtsuMethod(object):
         :type lowers: list
         """
         i = 0
-        while i != len(uppers):
-            if lowers[i] - uppers[i] < 10:
-                if i > 0:
-                    if uppers[i] - lowers[i-1] > 13 and i != len(uppers) - 1:
-                            lowers[i] = lowers[i + 1]
-                            lowers.remove(lowers[i+1])
-                            uppers.remove(uppers[i+1])
+        try:
+            while i != len(uppers):
+                if lowers[i] - uppers[i] < 10:
+                    if i > 0:
+                        if uppers[i] - lowers[i-1] > 13 and i != len(uppers) - 1:
+                                lowers[i] = lowers[i + 1]
+                                lowers.remove(lowers[i+1])
+                                uppers.remove(uppers[i+1])
+                                continue
+                        else:
+                            lowers[i - 1] = lowers[i]
+                            lowers.remove(lowers[i])
+                            uppers.remove(uppers[i])
                             continue
                     else:
-                        lowers[i - 1] = lowers[i]
                         lowers.remove(lowers[i])
-                        uppers.remove(uppers[i])
+                        uppers.remove(uppers[i+1])
                         continue
-                else:
-                    lowers.remove(lowers[i])
-                    uppers.remove(uppers[i+1])
-                    continue
-            i += 1
-        i = 0
-        while i < len(uppers):
-            if i < len(uppers) - 1:
-                if uppers[i + 1] - lowers[i] < 10:
-                    lowers.remove(lowers[i])
-                    uppers.remove(uppers[i + 1])
+                i += 1
+            i = 0
+            while i < len(uppers):
+                if i < len(uppers) - 1:
+                    if uppers[i + 1] - lowers[i] < 10:
+                        lowers.remove(lowers[i])
+                        uppers.remove(uppers[i + 1])
 
-                elif uppers[i + 1] - lowers[i] < 25:
-                    lowers.remove(lowers[i])
-                    uppers.remove(uppers[i + 1])
-                    i -= 1
-            i += 1
-        return uppers, lowers
+                    elif uppers[i + 1] - lowers[i] < 25:
+                        lowers.remove(lowers[i])
+                        uppers.remove(uppers[i + 1])
+                        i -= 1
+                i += 1
+            return uppers, lowers
+        except:
+            return uppers, lowers

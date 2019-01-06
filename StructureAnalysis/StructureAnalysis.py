@@ -167,20 +167,23 @@ class StructureAnalysis(object):
         :param boxes: array of BB
         :type boxes: Dictionary
         """
-        for i in range(len(boxes) - 3):
-            if boxes[i + 1][1]["value"] == '!':
-                boxes[i + 1][1]["x"] = boxes[i][1]["x"]
-                boxes[i + 1][1]["h"] += boxes[i][1]["h"]
-                boxes.remove(boxes[i])
-            elif boxes[i][1]["value"] == 'l' or boxes[i][1]["value"] == '1':
-                if boxes[i + 1][1]["value"] == '\\cdot':
-                    boxes[i][1]["value"] = "i"
-                    boxes.remove(boxes[i + 1])
-                elif i < (len(boxes) - 4):
-                    if boxes[i + 2][1]["value"] == '\\cdot' and boxes[i+3][1]["value"] != "!":
+        try:
+            for i in range(len(boxes) - 3):
+                if boxes[i + 1][1]["value"] == '!':
+                    boxes[i + 1][1]["x"] = boxes[i][1]["x"]
+                    boxes[i + 1][1]["h"] += boxes[i][1]["h"]
+                    boxes.remove(boxes[i])
+                elif boxes[i][1]["value"] == 'l' or boxes[i][1]["value"] == '1':
+                    if boxes[i + 1][1]["value"] == '\\cdot':
                         boxes[i][1]["value"] = "i"
-                        boxes.remove(boxes[i + 2])
-        return boxes
+                        boxes.remove(boxes[i + 1])
+                    elif i < (len(boxes) - 4):
+                        if boxes[i + 2][1]["value"] == '\\cdot' and boxes[i+3][1]["value"] != "!":
+                            boxes[i][1]["value"] = "i"
+                            boxes.remove(boxes[i + 2])
+            return boxes
+        except:
+            return boxes
 
 
 
@@ -251,7 +254,7 @@ class StructureAnalysis(object):
                         continue
 
                     # recognize below exponential relation
-                    elif boxes[i][1]["y"]  > ref["y"] + 0.4 * ref["h"]and \
+                    elif boxes[i][1]["y"] > ref["y"] + 0.4 * ref["h"]and \
                             boxes[i][1]["value"] not in self.exception and ref["value"] not in self.exception:
                         if boxes[i][1]["value"] == "-":
                             if i < len(boxes) - 1:
@@ -265,7 +268,7 @@ class StructureAnalysis(object):
                         while j != len(boxes):
                             if boxes[j][1]["value"].split(" ")[0] in self.spacialList:
                                 lastXcoordinate = int(float(boxes[j][1]["value"].split(" ")[1]))
-                                string, end , flag = self.mapToFanc[boxes[j][1]["value"].split(" ")[0]](boxes, j + 1,
+                                string, end, flag = self.mapToFanc[boxes[j][1]["value"].split(" ")[0]](boxes, j + 1,
                                                                                                  lastXcoordinate)
                                 resultString = resultString + string
                                 j = end
@@ -280,8 +283,6 @@ class StructureAnalysis(object):
                         resultString = resultString + "}"
                         flag = True
                         continue
-
-
 
                 if i < (len(boxes) - 1):
                     if abs(boxes[i + 1][1]["x"] - boxes[i][1]["x"]) == 0.5:
@@ -302,20 +303,23 @@ class StructureAnalysis(object):
         :param lastXcoordinate: the index of the last BB.
         :type lastXcoordinate: int
         """
-        numeratorDict = []
-        denominatorDict = []
-        i = start + 1
-        while boxes[i][1]["x"] <= lastXcoordinate:
-            if boxes[i][1]["y"] < boxes[start][1]["y"]:
-                numeratorDict.append(boxes[i])
-            else:
-                denominatorDict.append(boxes[i])
-            i += 1
-            if i == len(boxes):
-                break
-        numerator = self.RecAnalysis(self._FixPar(numeratorDict))
-        denominator = self.RecAnalysis(self._FixPar(denominatorDict))
-        return "\\frac{" + numerator + "}{" + denominator + "}" , i, True
+        try:
+            numeratorDict = []
+            denominatorDict = []
+            i = start + 1
+            while boxes[i][1]["x"] <= lastXcoordinate:
+                if boxes[i][1]["y"] < boxes[start][1]["y"]:
+                    numeratorDict.append(boxes[i])
+                else:
+                    denominatorDict.append(boxes[i])
+                i += 1
+                if i == len(boxes):
+                    break
+            numerator = self.RecAnalysis(self._FixPar(numeratorDict))
+            denominator = self.RecAnalysis(self._FixPar(denominatorDict))
+            return "\\frac{" + numerator + "}{" + denominator + "}" , i, True
+        except:
+            return "\\frac{?}", start, True
 
     def _IntegralHandling (self, boxes, start, lastXcoordinate):
         """
@@ -466,35 +470,41 @@ class StructureAnalysis(object):
         i = start
         limit = 0
         res = ""
-        while boxes[i][1]["x"] <= lastXcoordinate:
-            if boxes[i][1]["value"] != "l":
-                i = i + 1
-                continue
-            limit = boxes[i][1]["y"] + boxes[i][1]["h"]
-            break
-        i = start
-        while boxes[i][1]["x"] <= lastXcoordinate:
-            if boxes[i][1]["value"] in ["l", "i", "m"]:
-                if i < (boxes.__len__() - 1):
-                    i += 1
+        try:
+            while boxes[i][1]["x"] <= lastXcoordinate:
+                if boxes[i][1]["value"] != "l":
+                    i = i + 1
                     continue
-                else:
-                    return "\lim_{}", i, True
-            if boxes[i][1]["y"] > limit:
-                res = res + boxes[i][1]["value"]
-            else:
+                limit = boxes[i][1]["y"] + boxes[i][1]["h"]
                 break
-            i += 1
-        return "\lim_{" + res + "} ", i , True
+            i = start
+            while boxes[i][1]["x"] <= lastXcoordinate:
+                if boxes[i][1]["value"] in ["l", "i", "m"]:
+                    if i < (boxes.__len__() - 1):
+                        i += 1
+                        continue
+                    else:
+                        return "\lim_{}", i, True
+                if boxes[i][1]["y"] > limit:
+                    res = res + boxes[i][1]["value"]
+                else:
+                    break
+                i += 1
+            return "\lim_{" + res + "} ", i , True
+        except:
+            return "\lim_{?} ", start, True
 
     def _FixPar(self , boxes):
-        i = 0
-        while i != len(boxes):
-            if boxes[i][1]["value"].startswith('leftPar'):
-                for j in range(i + 1, len(boxes)):
-                    # add the bb that inside the Parenthesis.
-                    if boxes[j][1]["value"] == '\\right )':
-                        boxes[i][1]["value"] = "leftPar {}".format(boxes[j][1]['x'])
-                        break
-            i += 1
-        return boxes
+        try:
+            i = 0
+            while i != len(boxes):
+                if boxes[i][1]["value"].startswith('leftPar'):
+                    for j in range(i + 1, len(boxes)):
+                        # add the bb that inside the Parenthesis.
+                        if boxes[j][1]["value"] == '\\right )':
+                            boxes[i][1]["value"] = "leftPar {}".format(boxes[j][1]['x'])
+                            break
+                i += 1
+            return boxes
+        except:
+            return boxes

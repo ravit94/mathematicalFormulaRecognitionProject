@@ -12,7 +12,7 @@ class BoundingBoxes(object):
    def __init__(self):
       super(BoundingBoxes, self).__init__()
       self.symbolRecognition = SymbolRecognition()
-      # openCV return the inside of this symbols as another BB so we will skip over them.
+      # save the last box to compare it to current box.
       self.lastBox = {"x": 0, "y": 0, "h": 0, "w": 0, "value": '1'}
 
    def SegmentImageToBoxes(self, binaryImagePath):
@@ -29,6 +29,7 @@ class BoundingBoxes(object):
       image[image == 1] = 0
       im2 = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
+      # resize if the impage too small
       if (im2.shape[0] < 130) and (im2.shape[1] / im2.shape[0]) > 3.5:
          im2 = cv2.resize(im2, (4 * im2.shape[1], 4 * im2.shape[0]), interpolation=cv2.INTER_CUBIC)
          cv2.imwrite(binaryImagePath, im2)
@@ -41,10 +42,10 @@ class BoundingBoxes(object):
       directory = ""
       # for each boundingBoxes - save as image.
       for i in range(1, len(contours)):
-
          currentBoundingBox = contours[i]
          # The coordinate of the boundingBoxes.
          x, y, w, h = cv2.boundingRect(currentBoundingBox)
+         # check if skip
          if self._CheckIfContains(x, y, w, h):
             continue
          # Crop each box in the image and save it.
@@ -58,6 +59,7 @@ class BoundingBoxes(object):
             # all the information about this boundingBox
          cv2.imwrite(file_path, letter)
          value = self.symbolRecognition.Recognize(file_path)
+         # fix unusual cases
          if value == '\sum':
             x -= 7.5
          if value == '\cdot':
@@ -66,6 +68,7 @@ class BoundingBoxes(object):
          if value == '\\frac':
             if abs(w - h) < 5:
                value = '\cdot'
+         # check if equal sigh.
          if boundingBoxes.__contains__(x):
             if value == boundingBoxes.get(x)["value"]:
                if (value == '\\frac') or (value == "-"):
@@ -74,15 +77,17 @@ class BoundingBoxes(object):
             x += 0.5
          boundingBoxes.update({x: {"x": x, "y": y, "h": h, "w": w, "value": value}})
          self.lastBox = {"x": x, "y": y, "h": h, "w": w, "value": value}
+      # remove help folder
       shutil.rmtree(directory)
       # Return array of boundingBoxes sorted by
       return sorted(boundingBoxes.items())
 
 
    def _CheckIfContains(self, x, y, w, h):
-      if  x + w < self.lastBox['x'] + self.lastBox['w'] and y + h < self.lastBox['y'] + self.lastBox['h'] \
+      # check if the current box is inside the last box
+      if x + w < self.lastBox['x'] + self.lastBox['w'] and y + h < self.lastBox['y'] + self.lastBox['h'] \
               and x < self.lastBox['x'] + self.lastBox['w'] and y < self.lastBox['y'] + self.lastBox['h']\
-              and x > self.lastBox['x'] and y > self.lastBox['y'] and self.lastBox['value'] != '\sqrt'  or (h < 6 and w < 6):
+              and x > self.lastBox['x'] and y > self.lastBox['y'] and self.lastBox['value'] != '\sqrt' or (h < 6 and w < 6):
          return True
       return False
 
